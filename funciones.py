@@ -16,3 +16,11 @@ def restar_etiqueta(etiqueta):
     else:
         nuevo_valor = valor_actual - 1
         etiqueta["text"] = str(nuevo_valor)
+
+def subir_a_venta(etiqueta1, etiqueta2):
+    valor_actual = etiqueta1["text"]
+    etiqueta2["text"] = valor_actual
+
+def cerrar_programa(ventana):
+    ventana.destroy()
+    exit()
