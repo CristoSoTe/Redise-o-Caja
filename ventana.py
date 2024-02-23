@@ -1,8 +1,10 @@
 import tkinter as tk
 from funciones import *
 
-class Ventana:
+class Ventana():
     def __init__(self):
+        #super().__init__()
+
         self.ventana = tk.Tk()
         self.ventana.title("Ventana con Etiquetas y Botones")
         self.ventana.geometry("1600x900")
@@ -67,7 +69,7 @@ class Ventana:
                     indice += 1
                     if j == 2:
                         boton.config(command=lambda: cerrar_programa(self.ventana))
-
+            
             elif i > 0 and i < 10:
                 etiqueta_rotulo_titulo = tk.Label(frame_botones, text=f"RANGO {i}", bg=color, font=("Times New Roman",15,"bold"))
                 etiqueta_rotulo_titulo.pack(padx=10, pady=10)
@@ -78,29 +80,53 @@ class Ventana:
                 self.lista_etiquetas_series_preparadas.append(etiqueta_series)
                 colores_botones = ["blue", "#8B0000", "blue"]
                 indice = 0
+
                 for j in range(3):
                     if j == 0:
-                        boton = tk.Button(frame_botones, image=self.photoSube, bg=colores_botones[indice])
-                        boton.pack(pady=4)
-                        indice += 1
+                        boton = tk.Button(frame_botones, text=f"SUBIR", bg=colores_botones[indice], command=lambda i=i, j=j: self.on_click(i, j))
                     elif j == 1:
-                        boton = tk.Button(frame_botones, text=f"SUBIR", bg=colores_botones[indice], fg="white")
-                        boton.pack(pady=4)
-                        indice += 1
+                        boton = tk.Button(frame_botones, text=f"SUBIR", bg=colores_botones[indice], fg="white", command=lambda i=i, j=j: self.on_click(i, j))
                     else:
-                        boton = tk.Button(frame_botones, image=self.photoBaja, bg=colores_botones[indice])
-                        boton.pack(pady=4)
-                        indice += 1
+                        boton = tk.Button(frame_botones, text=f"SUBIR", bg=colores_botones[indice], command=lambda i=i, j=j: self.on_click(i, j))
+                    
+                    boton.pack(pady=4)
+                    indice += 1
 
-                    if j == 0:
-                        boton.config(command=lambda: incrementar_etiqueta(self.lista_etiquetas_series_preparadas[0]))
-                    if j == 1:
-                        boton.config(command=lambda: subir_a_venta(self.lista_etiquetas_series_preparadas[0], self.lista_etiquetas_series_venta[0]))
-                    if j == 2:
-                        boton.config(command=lambda: restar_etiqueta(self.lista_etiquetas_series_preparadas[0]))
+                    # if j == 0:
+                    #     boton.config(command=lambda: incrementar_etiqueta(self.lista_etiquetas_series_preparadas[0]))
+                    # if j == 1:
+                    #     boton.config(command=lambda: subir_a_venta(self.lista_etiquetas_series_preparadas[0], self.lista_etiquetas_series_venta[0]))
+                    # if j == 2:
+                    #     boton.config(command=lambda: restar_etiqueta(self.lista_etiquetas_series_preparadas[0]))
             else:
                 boton = tk.Button(frame_botones, text="COMENZAR", width=10, height=2, bg="green", fg="white",font=("Times New Roman",15,"bold"),cursor="hand2")
                 boton.pack(padx=5, pady=100)
+
+    def on_click(self, i, j):
+        # Comportamiento específico de cada botón
+        if i == 1 and j == 0:
+            incrementar_etiqueta(self.lista_etiquetas_series_preparadas[0])
+        elif i == 1 and j == 1:
+            subir_a_venta(self.lista_etiquetas_series_preparadas[0], self.lista_etiquetas_series_venta[0])
+        elif i == 1 and j == 2:
+            restar_etiqueta(self.lista_etiquetas_series_preparadas[0])
+        elif i == 2 and j == 0:
+            incrementar_etiqueta(self.lista_etiquetas_series_preparadas[1])
+        elif i == 2 and j == 1:
+            subir_a_venta(self.lista_etiquetas_series_preparadas[1], self.lista_etiquetas_series_venta[1])
+        elif i == 2 and j == 2:
+            restar_etiqueta(self.lista_etiquetas_series_preparadas[1])
+        elif i == 3 and j == 0:
+            incrementar_etiqueta(self.lista_etiquetas_series_preparadas[2])
+        elif i == 3 and j == 1:
+            subir_a_venta(self.lista_etiquetas_series_preparadas[2], self.lista_etiquetas_series_venta[2])
+        elif i == 3 and j == 2:
+            restar_etiqueta(self.lista_etiquetas_series_preparadas[2])
+
+
+        
+        print(f"Botón presionado en RANGO {i}, posición {j}")
+
 
     def ejecutar(self):
         self.ventana.mainloop()
