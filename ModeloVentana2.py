@@ -49,12 +49,6 @@ class Ventana():
                 etiqueta_rotulo_titulo = tk.Label(frame_columna, text=f"TOTAL", bg="white") # Etiqueta numero de rango en liquidacion
                 etiqueta_rotulo_titulo.pack(padx=10, pady=10)
 
-            
-
-        
-        
-
-
     def ejecutar(self):
         self.ventana.mainloop()
 
