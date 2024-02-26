@@ -34,19 +34,6 @@ class Ventana():
             self.frame_columna = tk.Frame(self.ventana, bg=color, bd=2, relief="groove")
             self.frame_columna.grid(row=1, column=i, sticky="nsew")  # sticky para expandir la columna
 
-            # if i == 0:
-            #     self.frame_columna.config(bg="#87CEEB")
-            #     etiqueta = tk.Label(self.frame_columna, text="PRECIOS", bg="white", font=("Times New Roman",15,"bold"))
-            #     etiqueta.pack(padx=10, pady=10)
-            #     indice = 0
-            #     for j in range (4):
-            #         precios = ["1,5", "2", "3", "6"]
-            #         etiqueta = tk.Label(self.frame_columna, text=precios[indice], bg="white")
-            #         etiqueta.pack(padx=10, pady=10)
-            #         indice += 1
-
-            #     linea_divisoria(self.frame_columna)
-
             if i == 0:
                 # COLUMNA RANGO 1
                 self.frame_columna.config(bg="#00FFFF")
