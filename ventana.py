@@ -1,4 +1,4 @@
-# HAY QUE QUITAR EN TODOS LOS PACK DE LOS WIDGETS LA SIGUIENTE LINEA: fill="both", expand=True, pady=10
+# hay que cambiar la direccion de las imagenes de los botones
 
 import tkinter as tk
 from funciones import *
@@ -12,8 +12,8 @@ class Ventana():
         #self.ventana.attributes('-fullscreen', True)
         self.ventana.geometry("1600x900")
 
-        self.photoSube=tk.PhotoImage(file=r"C:\Users\crist\OneDrive\Escritorio\CajaCopilot\flechaSube.png")
-        self.photoBaja=tk.PhotoImage(file=r"C:\Users\crist\OneDrive\Escritorio\CajaCopilot\flechaBaja.png")
+        self.photoSube=tk.PhotoImage(file=r"/Users/cristosoto/Documents/CajaCopilot/Redise-o-Caja/flechaSube.png")#C:\Users\crist\OneDrive\Escritorio\CajaCopilot\flechaSube.png
+        self.photoBaja=tk.PhotoImage(file=r"/Users/cristosoto/Documents/CajaCopilot/Redise-o-Caja/flechaBaja.png")#C:\Users\crist\OneDrive\Escritorio\CajaCopilot\flechaBaja.png
 
         #---CONFIGURACION DE LAS COLUMNAS
         for i in range(7):
@@ -258,7 +258,7 @@ class Ventana():
         self.boton_cierre = tk.Button(self.frame_columna5, text=f"CERRAR", font=("Times New Roman",18,"bold"), bg="green", fg="white" )
         self.boton_cierre.pack()
 
-
+        #---FRAME BOTONES DE SUBIDA Y BAJADA DE SERIES
         self.lista_etiquetas_series_preparadas = []
         for i in range(11):
             color = colores[i % 2]  # Alternar entre los dos colores
@@ -282,11 +282,11 @@ class Ventana():
 
                 for j in range(3):
                     if j == 0:
-                        boton = tk.Button(self.frame_botones, text=f"SUBIR", bg=colores_botones[indice], command=lambda i=i, j=j: self.on_click(i, j))
+                        boton = tk.Button(self.frame_botones, image=self.photoSube, bg=colores_botones[indice], command=lambda i=i, j=j: self.on_click(i, j))
                     elif j == 1:
                         boton = tk.Button(self.frame_botones, text=f"SUBIR", bg=colores_botones[indice], fg="white", command=lambda i=i, j=j: self.on_click(i, j))
                     else:
-                        boton = tk.Button(self.frame_botones, text=f"SUBIR", bg=colores_botones[indice], command=lambda i=i, j=j: self.on_click(i, j))
+                        boton = tk.Button(self.frame_botones, image=self.photoBaja, bg=colores_botones[indice], command=lambda i=i, j=j: self.on_click(i, j))
                     
                     boton.pack(pady=4)
                     indice += 1
@@ -303,7 +303,7 @@ class Ventana():
 
         self.frame_columna6 = tk.Frame(self.ventana, bg="blue", bd=2, relief="groove")
         self.frame_columna6.grid(row=6, column=0, columnspan=11, sticky="nsew")
-        self.boton_cierre = tk.Button(self.frame_columna6, text=f"CERRAR", font=("Times New Roman",18,"bold"), bg="green", fg="white" )
+        self.boton_cierre = tk.Button(self.frame_columna6, text=f"CERRAR", font=("Times New Roman",18,"bold"), background="green", fg="white" )
         self.boton_cierre.pack()
         self.boton_cierre = tk.Button(self.frame_columna6, text=f"CERRAR", font=("Times New Roman",18,"bold"), bg="green", fg="white" )
         self.boton_cierre.pack()
