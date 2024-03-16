@@ -1,5 +1,3 @@
-# HAY QUE QUITAR EN TODOS LOS PACK DE LOS WIDGETS LA SIGUIENTE LINEA: fill="both", expand=True, pady=10
-
 import tkinter as tk
 from funciones import *
 import os
@@ -9,8 +7,8 @@ class Ventana():
         #super().__init__()
 
         self.ventana = tk.Tk()
-        #self.ventana.attributes('-fullscreen', True)
-        self.ventana.geometry("1600x900")
+        self.ventana.attributes('-fullscreen', True)
+        #self.ventana.geometry("1600x900")
 
         self.photoSube=tk.PhotoImage(file=r"C:\Users\crist\OneDrive\Escritorio\CajaCopilot\flechaSube.png")
         self.photoBaja=tk.PhotoImage(file=r"C:\Users\crist\OneDrive\Escritorio\CajaCopilot\flechaBaja.png")
@@ -37,7 +35,7 @@ class Ventana():
 
 
         #----FRAME ENCABEZAMIENTO CON ETIQUETA LIQUIDACIÓN---
-        self.frame_columna1 = tk.Frame(self.ventana, bg="blue", bd=2, relief="groove")
+        self.frame_columna1 = tk.Frame(self.ventana, bg="blue")
         self.frame_columna1.grid(row=0, column=0, columnspan=11, sticky="nsew")
         self.etiqueta_zona_venta = tk.Label(self.frame_columna1, text="LIQUIDACIÓN", font=("Times New Roman",18,"bold"), bg="blue", fg="white" ) # Etiqueta numero de rango en liquidacion
         self.etiqueta_zona_venta.pack(fill="both", expand=True, pady=5)
@@ -48,30 +46,30 @@ class Ventana():
             color = colores[i % 2]  # Alternar entre los dos colores
 
             self.frame_columna2 = tk.Frame(self.ventana, bg=color, bd=2, relief="groove")
-            self.frame_columna2.grid(row=1, column=i, sticky="nsew")  # sticky para expandir la columna
+            self.frame_columna2.grid(row=1, column=i, sticky="nsew")  # 
 
             if i == 0:
                 # COLUMNA RANGO 1
                 self.frame_columna2.config(bg="#00FFFF")
                 self.etiqueta_rotulo_titulo_rango1 = tk.Label(self.frame_columna2, text=f"RANGO 1", font=("Times New Roman",18,"bold"), bg="#00FFFF") # Etiqueta numero de rango en liquidacion
-                self.etiqueta_rotulo_titulo_rango1.pack()
+                self.etiqueta_rotulo_titulo_rango1.pack(expand=True)#, tk.BOTH
 
                 self.euros_liquidacion_rango1 = tk.Label(self.frame_columna2, text=0, fg="blue", bg = "white", font=("Times New Roman",17,"bold"), width=6)
-                self.euros_liquidacion_rango1.pack()
+                self.euros_liquidacion_rango1.pack(expand=True)
                 self.lista_liquidacion_euros.append(self.euros_liquidacion_rango1)
 
                 self.etiqueta_series_liquidacion_rango1=tk.Label(self.frame_columna2, text = "SERIES + Pico", font=("Times New Roman", 13,"bold"), bg="#00FFFF")
-                self.etiqueta_series_liquidacion_rango1.pack()
+                self.etiqueta_series_liquidacion_rango1.pack(expand=True)
 
                 self.numero_series_liquidacion_rango1 = tk.Label(self.frame_columna2, text="0", fg="blue", bg = "white", font=("Times New Roman",17,"bold"), width=4)
-                self.numero_series_liquidacion_rango1.pack()
+                self.numero_series_liquidacion_rango1.pack(expand=True)
                 self.lista_numero_series_liquidacion.append(self.numero_series_liquidacion_rango1)
 
                 self.etiqueta_del_al_liquidacion_rango1=tk.Label(self.frame_columna2, text = "DEL-AL", font=("Times New Roman", 13,"bold"), bg="#00FFFF")
-                self.etiqueta_del_al_liquidacion_rango1.pack()
+                self.etiqueta_del_al_liquidacion_rango1.pack(expand=True)
 
                 self.cartones_liquidacion_rango1 = tk.Label(self.frame_columna2, text=0, fg="blue", bg = "white", font=("Times New Roman",13,"bold"), width=8)
-                self.cartones_liquidacion_rango1.pack()
+                self.cartones_liquidacion_rango1.pack(expand=True)
                 self.lista_cartones_liquidacion.append(self.cartones_liquidacion_rango1)
 
                 #linea_divisoria(self.frame_columna2) 
@@ -79,76 +77,76 @@ class Ventana():
             if i > 0 and i < 9:
                 # COLUMNA RANGOS DEL 2 AL 9
                 self.etiqueta_rotulo_titulo_rangos = tk.Label(self.frame_columna2, text=f"RANGO {i+1}", bg=color, font=("Times New Roman",18,"bold")) # Etiqueta numero de rango en liquidacion
-                self.etiqueta_rotulo_titulo_rangos.pack()
+                self.etiqueta_rotulo_titulo_rangos.pack(expand=True)
 
                 self.euros_liquidacion_rangos = tk.Label(self.frame_columna2, text=0, fg="blue", bg = "white", font=("Times New Roman",17,"bold"), width=6)
-                self.euros_liquidacion_rangos.pack()
+                self.euros_liquidacion_rangos.pack(expand=True)
                 self.lista_liquidacion_euros.append(self.euros_liquidacion_rangos)
 
                 self.etiqueta_series_liquidacion_rangos=tk.Label(self.frame_columna2, text = "SERIES", font=("Times New Roman", 13,"bold"), bg=color)
-                self.etiqueta_series_liquidacion_rangos.pack()
+                self.etiqueta_series_liquidacion_rangos.pack(expand=True)
 
                 self.numero_series_liquidacion_rangos = tk.Label(self.frame_columna2, text=0, fg="blue", bg = "white", font=("Times New Roman",17,"bold"), width=3)
-                self.numero_series_liquidacion_rangos.pack()
+                self.numero_series_liquidacion_rangos.pack(expand=True)
                 self.lista_numero_series_liquidacion.append(self.numero_series_liquidacion_rangos)
 
                 self.etiqueta_del_al_liquidacion_rangos=tk.Label(self.frame_columna2, text = "DEL-AL", font=("Times New Roman", 13,"bold"), bg=color)
-                self.etiqueta_del_al_liquidacion_rangos.pack()
+                self.etiqueta_del_al_liquidacion_rangos.pack(expand=True)
 
                 self.cartones_liquidacion_rangos = tk.Label(self.frame_columna2, text="1240-1260", fg="blue", bg = "white", font=("Times New Roman",13,"bold"), width=8)
-                self.cartones_liquidacion_rangos.pack()
+                self.cartones_liquidacion_rangos.pack(expand=True)
                 self.lista_cartones_liquidacion.append(self.cartones_liquidacion_rangos)
 
             if i == 9:
                 #COLUMNA RANGO CIERRE
                 self.frame_columna2.config(bg="#00FFFF")
                 self.etiqueta_rotulo_titulo_cierre = tk.Label(self.frame_columna2, text=f"CIERRE", font=("Times New Roman",18,"bold"), bg="#00FFFF") # Etiqueta numero de rango en liquidacion
-                self.etiqueta_rotulo_titulo_cierre.pack()
+                self.etiqueta_rotulo_titulo_cierre.pack(expand=True)
 
                 self.euros_liquidacion_cierre = tk.Label(self.frame_columna2, text=0, fg="blue", bg = "white", font=("Times New Roman",17,"bold"), width=6)
-                self.euros_liquidacion_cierre.pack()
+                self.euros_liquidacion_cierre.pack(expand=True)
                 self.lista_liquidacion_euros.append(self.euros_liquidacion_cierre)
 
                 self.etiqueta_series_liquidacion_rangos=tk.Label(self.frame_columna2, text = "SERIES + Pico", font=("Times New Roman", 13,"bold"), bg="#00FFFF")
-                self.etiqueta_series_liquidacion_rangos.pack()
+                self.etiqueta_series_liquidacion_rangos.pack(expand=True)
 
                 self.numero_series_liquidacion_cierre = tk.Label(self.frame_columna2, text=0, fg="blue", bg = "white", font=("Times New Roman",17,"bold"), width=4)
-                self.numero_series_liquidacion_cierre.pack()
+                self.numero_series_liquidacion_cierre.pack(expand=True)
                 self.lista_numero_series_liquidacion.append(self.numero_series_liquidacion_cierre)
 
                 self.etiqueta_del_al_liquidacion_cierre=tk.Label(self.frame_columna2, text = "DEL-AL", font=("Times New Roman", 13,"bold"), bg="#00FFFF")
-                self.etiqueta_del_al_liquidacion_cierre.pack()
+                self.etiqueta_del_al_liquidacion_cierre.pack(expand=True)
 
                 self.cartones_liquidacion_cierre = tk.Label(self.frame_columna2, text=0, fg="blue", bg = "white", font=("Times New Roman",13,"bold"), width=8)
-                self.cartones_liquidacion_cierre.pack()
+                self.cartones_liquidacion_cierre.pack(expand=True)
                 self.lista_cartones_liquidacion.append(self.cartones_liquidacion_cierre)
 
             if i == 10:
                 # COLUMNA TOTAL
                 self.frame_columna2.config(bg="#0099ff")
                 etiqueta_rotulo_titulo_total = tk.Label(self.frame_columna2, text=f"TOTAL", bg="#0099ff", font=("Times New Roman",18,"bold")) # Etiqueta numero de rango en liquidacion
-                etiqueta_rotulo_titulo_total.pack()
+                etiqueta_rotulo_titulo_total.pack(expand=True)
 
                 self.euros_liquidacion_total = tk.Label(self.frame_columna2, text=0, fg="blue", bg = "white", font=("Times New Roman",17,"bold"), width=6)
-                self.euros_liquidacion_total.pack()
+                self.euros_liquidacion_total.pack(expand=True)
                 self.lista_liquidacion_euros.append(self.euros_liquidacion_total)
 
                 etiqueta_liquidacion_total=tk.Label(self.frame_columna2, text = "SERIES", font=("Times New Roman", 13,"bold"), bg="#0099ff")
-                etiqueta_liquidacion_total.pack()
+                etiqueta_liquidacion_total.pack(expand=True)
 
                 self.numero_series_liquidacion_total = tk.Label(self.frame_columna2, text=0, fg="blue", bg = "white", font=("Times New Roman",17,"bold"), width=3)
-                self.numero_series_liquidacion_total.pack()
+                self.numero_series_liquidacion_total.pack(expand=True)
                 self.lista_numero_series_liquidacion.append(self.numero_series_liquidacion_total)
 
                 self.etiqueta_del_al_liquidacion_total=tk.Label(self.frame_columna2, text = "DEL-AL", font=("Times New Roman", 13,"bold"), bg="#0099ff")
-                self.etiqueta_del_al_liquidacion_total.pack()
+                self.etiqueta_del_al_liquidacion_total.pack(expand=True)
 
                 self.cartones_liquidacion_total = tk.Label(self.frame_columna2, text=0, fg="blue", bg = "white", font=("Times New Roman",13,"bold"), width=8)
-                self.cartones_liquidacion_total.pack()
+                self.cartones_liquidacion_total.pack(expand=True)
                 self.lista_cartones_liquidacion.append(self.cartones_liquidacion_total)
 
         #---FRAME ENCABEZAMIENTO CON ETIQUETA VENTA---
-        self.frame_columna3 = tk.Frame(self.ventana, bg="blue", bd=2, relief="groove")
+        self.frame_columna3 = tk.Frame(self.ventana, bg="blue")
         self.frame_columna3.grid(row=2, column=0, columnspan=11, sticky="nsew")
         self.etiqueta_zona_venta = tk.Label(self.frame_columna3, text=f"VENTA", font=("Times New Roman",18,"bold"), bg="blue", fg="white" ) # Etiqueta numero de rango en liquidacion
         self.etiqueta_zona_venta.pack()
@@ -253,10 +251,10 @@ class Ventana():
                     tk.Label(self.frame_columna4, text= i, font=("Times New Roman",20,"bold"), bg="#0099ff").pack(pady=20)
 
         #---FRAME ENCABEZAMIENTO CON ETIQUETA VENTA---
-        self.frame_columna5 = tk.Frame(self.ventana, bg="blue", bd=2, relief="groove")
+        self.frame_columna5 = tk.Frame(self.ventana, bg="blue")
         self.frame_columna5.grid(row=4, column=0, columnspan=11, sticky="nsew")
         self.boton_cierre = tk.Button(self.frame_columna5, text=f"CERRAR", font=("Times New Roman",18,"bold"), bg="green", fg="white" )
-        self.boton_cierre.pack()
+        self.boton_cierre.pack(pady=2)
 
 
         self.lista_etiquetas_series_preparadas = []
@@ -264,49 +262,86 @@ class Ventana():
             color = colores[i % 2]  # Alternar entre los dos colores
             self.frame_botones = tk.Frame(self.ventana, bg=color, bd=2, relief="groove")
             self.frame_botones.grid(row=5, column=i, sticky="nsew")
+
             if i == 0:
                 etiqueta_rotulo_titulo = tk.Label(self.frame_botones, text=f"RANGO {i+1}", bg=color, font=("Times New Roman",15,"bold"))
-                etiqueta_rotulo_titulo.pack()
-                
+                etiqueta_rotulo_titulo.pack(expand=True)
+                etiqueta_rotulo_series = tk.Label(self.frame_botones, text="SERIES", bg=color, font=("Arial",10,"bold"))
+                etiqueta_rotulo_series.pack(expand=True)
+                etiqueta_series = tk.Label(self.frame_botones, text="0", fg="blue", bg = "white", font=("Times New Roman",17,"bold"))
+                etiqueta_series.pack(expand=True)
+                self.lista_etiquetas_series_preparadas.append(etiqueta_series)
+
+                boton_subir_rango1 = tk.Button(self.frame_botones, image=self.photoSube)
+                boton_subir_rango1.pack(pady=3, expand=True)
+                boton_prepara_rango1 = tk.Button(self.frame_botones, text="VENTA", bg="Orange")
+                boton_prepara_rango1.pack(pady=3, expand=True)
+                boton_bajar_rango1 = tk.Button(self.frame_botones, image=self.photoBaja)
+                boton_bajar_rango1.pack(pady=3, expand=True) 
             
             elif i > 0 and i < 9:
                 etiqueta_rotulo_titulo = tk.Label(self.frame_botones, text=f"RANGO {i+1}", bg=color, font=("Times New Roman",15,"bold"))
-                etiqueta_rotulo_titulo.pack()
+                etiqueta_rotulo_titulo.pack(expand=True)
                 etiqueta_rotulo_series = tk.Label(self.frame_botones, text="SERIES", bg=color, font=("Arial",10,"bold"))
-                etiqueta_rotulo_series.pack()
+                etiqueta_rotulo_series.pack(expand=True)
                 etiqueta_series = tk.Label(self.frame_botones, text="0", fg="blue", bg = "white", font=("Times New Roman",17,"bold"))
-                etiqueta_series.pack()
+                etiqueta_series.pack(expand=True)
                 self.lista_etiquetas_series_preparadas.append(etiqueta_series)
-                colores_botones = ["blue", "#8B0000", "blue"]
                 indice = 0
 
                 for j in range(3):
                     if j == 0:
-                        boton = tk.Button(self.frame_botones, text=f"SUBIR", bg=colores_botones[indice], command=lambda i=i, j=j: self.on_click(i, j))
+                        boton = tk.Button(self.frame_botones, image=self.photoSube, command=lambda i=i, j=j: self.on_click(i, j))
                     elif j == 1:
-                        boton = tk.Button(self.frame_botones, text=f"SUBIR", bg=colores_botones[indice], fg="white", command=lambda i=i, j=j: self.on_click(i, j))
+                        boton = tk.Button(self.frame_botones, text="VENTA", bg="Orange", command=lambda i=i, j=j: self.on_click(i, j))
                     else:
-                        boton = tk.Button(self.frame_botones, text=f"SUBIR", bg=colores_botones[indice], command=lambda i=i, j=j: self.on_click(i, j))
+                        boton = tk.Button(self.frame_botones, image=self.photoBaja, command=lambda i=i, j=j: self.on_click(i, j))
                     
-                    boton.pack(pady=4)
-                    indice += 1
+                    boton.pack(pady=3, expand=True)
 
-            # rotulos = ["HISTÓRICO", "RESET", "SALIR"]
-            # colores_botones = ["Green", "#8B0000", "red"]
-            # indice = 0
-            # for j in range(3):
-            #     boton = tk.Button(frame_botones, text=rotulos[indice], fg = "white", bg = colores_botones[indice], width=10, height=2,font=("Times New Roman",15,"bold"),cursor="hand2")
-            #     boton.pack(pady = 10)
-            #     indice += 1
-            #     if j == 2:
-            #         boton.config(command=lambda: cerrar_programa(self.ventana))
+            elif i == 9:
+                boton_comenzar = tk.Button(self.frame_botones, text="VENTA", bg="Orange", width=10, height=2)
+                boton_comenzar.pack(expand=True)
 
-        self.frame_columna6 = tk.Frame(self.ventana, bg="blue", bd=2, relief="groove")
+            elif i == 10:
+                boton_atras = tk.Button(self.frame_botones, text="ATRÁS", bg="#e8e800", width=10, height=1)
+                boton_atras.pack(expand=True)
+                boton_historico = tk.Button(self.frame_botones, text="HISTÓRICO", bg="#00f078", width=10, height=1)
+                boton_historico.pack(expand=True)
+                boton_salir = tk.Button(self.frame_botones, text="SALIR", bg="red", width=10, height=1)
+                boton_salir.pack(expand=True)
+
+        #---FRAME DE RELLENO
+
+        self.frame_columna6 = tk.Frame(self.ventana, bg="blue")
         self.frame_columna6.grid(row=6, column=0, columnspan=11, sticky="nsew")
-        self.boton_cierre = tk.Button(self.frame_columna6, text=f"CERRAR", font=("Times New Roman",18,"bold"), bg="green", fg="white" )
-        self.boton_cierre.pack()
-        self.boton_cierre = tk.Button(self.frame_columna6, text=f"CERRAR", font=("Times New Roman",18,"bold"), bg="green", fg="white" )
-        self.boton_cierre.pack()
+        tk.Label(self.frame_columna6, text = "", bg="blue", fg= "white", font=("Times New Roman",1,"bold"), anchor="e", justify="right").pack(pady=1)
+
+        #--- FRAME INFORMACION DEL cm70
+
+        self.frame_columna7 = tk.Frame(self.ventana, bg="blue")#, bd=2, relief="groove"
+        self.frame_columna7.grid(row=7, column=0, columnspan=11, sticky="nsew")
+        self.etiquetas_premios = ["PRECIO", "DEL", "IMPRESOS", "RECAUDADO", "PREMIO LINEA", "PRIMA", "VENDIDOS", "AL", "INFORMATICOS","CAJA IMPRESOS", "PREMIO BINGO", "PRIMA EXTRA"]
+        valor_fila = 0
+        valor_columna = 0
+        self.entradas = []
+        for etiqueta_premio in self.etiquetas_premios:
+            tk.Label(self.frame_columna7, text = etiqueta_premio, bg="blue", fg= "white", font=("Times New Roman",13,"bold"), anchor="e", justify="right").grid(row = valor_fila, column = valor_columna, sticky = "ew", padx= 10)
+            valor_columna += 1
+            entrada = tk.Entry(self.frame_columna7, font=("Times New Roman",13,"bold"), justify="right", width=14)
+            entrada.grid(row = valor_fila, column = valor_columna, sticky = "ew", pady=1)
+            valor_columna += 1
+
+            self.entradas.append(entrada)
+
+            if valor_columna > 11:
+                valor_fila = 1
+                valor_columna = 0
+
+        self.frame_columna8 = tk.Frame(self.ventana, bg="blue")
+        self.frame_columna8.grid(row=8, column=0, columnspan=11, sticky="nsew")
+        tk.Label(self.frame_columna8, text = "", bg="blue", fg= "white", font=("Times New Roman",1,"bold"), anchor="e", justify="right").pack(pady=1)
+
 
     def ejecutar(self):
         self.ventana.mainloop()
@@ -317,7 +352,10 @@ if __name__ == "__main__":
 
 # En el frame_columna1 solo esta la etiqueta "LIQUIDACIÓN"
 # En el frame_columna2 esta toda la informacion de liquidación
-# En el fram_columna3 solo esta la etiqueta "VENTA"
+# En el frame_columna3 solo esta la etiqueta "VENTA"
 # En el frame_columna4 esta toda la información de la proxima partida que se va a liquidar
 # En el frame_columna5 solo esta el boton CERRAR
 # En el frame_botones estan todos los botones de subir y bajas series
+# El frame_columna8 es de relleno
+# En El frame_columna7 esta la informacion del CM70
+# El frame_columna8 es de relleno
