@@ -10,8 +10,8 @@ class Ventana():
         self.ventana.attributes('-fullscreen', True)
         #self.ventana.geometry("1600x900")
 
-        self.photoSube=tk.PhotoImage(file=r"C:\Users\crist\OneDrive\Escritorio\CajaCopilot\flechaSube.png")
-        self.photoBaja=tk.PhotoImage(file=r"C:\Users\crist\OneDrive\Escritorio\CajaCopilot\flechaBaja.png")
+        self.photoSube=tk.PhotoImage(file=r"/Users/crist/OneDrive/Escritorio/CajaCopilot/flechaSube.png")#C:\Users\crist\OneDrive\Escritorio\CajaCopilot
+        self.photoBaja=tk.PhotoImage(file=r"/Users/crist/OneDrive/Escritorio/CajaCopilot/flechaBaja.png")#C:\Users\crist\OneDrive\Escritorio\CajaCopilot\flechaBaja.png
 
         #---CONFIGURACION DE LAS COLUMNAS
         for i in range(7):
@@ -256,7 +256,7 @@ class Ventana():
         self.boton_cierre = tk.Button(self.frame_columna5, text=f"CERRAR", font=("Times New Roman",18,"bold"), bg="green", fg="white" )
         self.boton_cierre.pack(pady=2)
 
-
+        #---FRAME BOTONES DE SUBIDA Y BAJADA DE SERIES
         self.lista_etiquetas_series_preparadas = []
         for i in range(11):
             color = colores[i % 2]  # Alternar entre los dos colores
@@ -341,7 +341,6 @@ class Ventana():
         self.frame_columna8 = tk.Frame(self.ventana, bg="blue")
         self.frame_columna8.grid(row=8, column=0, columnspan=11, sticky="nsew")
         tk.Label(self.frame_columna8, text = "", bg="blue", fg= "white", font=("Times New Roman",1,"bold"), anchor="e", justify="right").pack(pady=1)
-
 
     def ejecutar(self):
         self.ventana.mainloop()
