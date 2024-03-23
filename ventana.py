@@ -7,11 +7,11 @@ class Ventana():
         #super().__init__()
 
         self.ventana = tk.Tk()
-        #self.ventana.attributes('-fullscreen', True)
-        self.ventana.geometry("1600x900")
+        self.ventana.attributes('-fullscreen', True)
+        #self.ventana.geometry("1600x900")
 
-        self.photoSube=tk.PhotoImage(file=r"/Users/crist/OneDrive/Escritorio/CajaCopilot/flechaSube.png")#C:\Users\crist\OneDrive\Escritorio\CajaCopilot
-        self.photoBaja=tk.PhotoImage(file=r"/Users/crist/OneDrive/Escritorio/CajaCopilot/flechaBaja.png")#C:\Users\crist\OneDrive\Escritorio\CajaCopilot\flechaBaja.png
+        self.photoSube=tk.PhotoImage(file=r"/home/redinf/Copilot/Redise-o-Caja/flechaSube.png")#C:\Users\crist\OneDrive\Escritorio\CajaCopilot\flechaSaja.png
+        self.photoBaja=tk.PhotoImage(file=r"/home/redinf/Copilot/Redise-o-Caja/flechaBaja.png")#C:\Users\crist\OneDrive\Escritorio\CajaCopilot\flechaBaja.png
 
         #---CONFIGURACION DE LAS COLUMNAS
         for i in range(7):
@@ -95,7 +95,7 @@ class Ventana():
                 self.etiqueta_del_al_liquidacion_rangos=tk.Label(self.frame_columna2, text = "DEL-AL", font=("Times New Roman", 13,"bold"), bg=color)
                 self.etiqueta_del_al_liquidacion_rangos.pack(expand=True)
 
-                self.cartones_liquidacion_rangos = tk.Label(self.frame_columna2, text="1240-1260", fg="blue", bg = "white", font=("Times New Roman",13,"bold"), width=8)
+                self.cartones_liquidacion_rangos = tk.Label(self.frame_columna2, text="0", fg="blue", bg = "white", font=("Times New Roman",13,"bold"), width=8)
                 self.cartones_liquidacion_rangos.pack(expand=True)
                 self.lista_cartones_liquidacion.append(self.cartones_liquidacion_rangos)
 
