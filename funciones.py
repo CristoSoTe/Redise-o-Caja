@@ -27,12 +27,38 @@ class MisFunciones:
         valor_actual = etiqueta1["text"]
         etiqueta2["text"] = valor_actual
 
-    def linea_divisoria(dato):
-        canvas = tk.Canvas(dato, height=40, bg='#0000FF')
-        canvas.pack(fill=tk.X, pady=15)
+    def suber_todo_a_venta(self, lista_origen, lista_destino, salida):
 
-        # Dibujamos la línea divisoria
-        canvas.create_line(0, 1, 400, 1, fill='#0000FF', width=2)
+        for label_origen, label_destino in zip(lista_origen, lista_destino):
+            texto_origen = label_origen.cget("text")
+            label_destino.config(text=texto_origen)
+        salida_rango1=salida[1].get()
+        self.pico_salida(salida_rango1)
+
+    def pico_salida(self, salida):
+        try:
+            if salida == 0 or salida == "":
+                pass
+            else:
+                self.pico_sal = 7 - (int(salida) % 6)
+                if self.pico_sal == 7:
+                    self.pico_sal = 1
+                elif self.pico_sal == 6:
+                    self.pico_sal = 0
+        except:
+            pass
+        print(self.pico_sal)
+
+    def pico_cierre(self, cierre):
+        try:
+            if cierre == "0" or cierre == "":
+                pass
+            else:
+                self.pico_cie = (int(cierre) % 6)
+        except:
+            pass
+
+
 
     def cerrar_programa(self):
         self.ventana.destroy()

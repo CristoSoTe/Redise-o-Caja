@@ -31,7 +31,7 @@ class Ventana():
         self.lista_carton_salida_siguiente_2_al_cierre = []
 
         # LISTAS ZONA DE BOTONES DE SUBIR Y BAJAR SERIES
-        self.lista_etiquetas_series_preparadas = []
+        self.lista_series_preparadas = []
 
 
         #----FRAME ENCABEZAMIENTO CON ETIQUETA LIQUIDACIÓN---
@@ -178,6 +178,8 @@ class Ventana():
                     self.Entry_carton_salida = tk.Entry(self.frame_columna4, text="", fg="blue", bg = "white", font=("Times New Roman",17,"bold"), width=6, justify="right")
                     self.Entry_carton_salida.pack(pady=19)
                     self.lista_Entry_carton_salida.append(self.Entry_carton_salida)
+                    self.Entry_carton_salida.delete(0, tk.END)  # Borra el contenido actual del Entry
+                    self.Entry_carton_salida.insert(0, 4) 
 
             if i > 0 and i < 9:
                 # COLUMNA RANGOS DEL 2 AL 9
@@ -259,7 +261,7 @@ class Ventana():
         self.boton_cierre.pack(pady=2)
 
         #---FRAME BOTONES DE SUBIDA Y BAJADA DE SERIES
-        self.lista_etiquetas_series_preparadas = []
+        self.lista_series_preparadas = []
         for i in range(11):
             color = colores[i % 2]  # Alternar entre los dos colores
             self.frame_botones = tk.Frame(self.ventana, bg=color, bd=2, relief="groove")
@@ -272,13 +274,13 @@ class Ventana():
                 etiqueta_rotulo_series.pack(expand=True)
                 etiqueta_series = tk.Label(self.frame_botones, text="0", fg="blue", bg = "white", font=("Times New Roman",17,"bold"))
                 etiqueta_series.pack(expand=True)
-                self.lista_etiquetas_series_preparadas.append(etiqueta_series)
+                self.lista_series_preparadas.append(etiqueta_series)
 
-                boton_subir_rango1 = tk.Button(self.frame_botones, image=self.photoSube, command=lambda ident=0: objeto_funciones.incrementar_etiqueta(ident, self.lista_etiquetas_series_preparadas[0]))
+                boton_subir_rango1 = tk.Button(self.frame_botones, image=self.photoSube, command=lambda ident=0: objeto_funciones.incrementar_etiqueta(ident, self.lista_series_preparadas[0]))
                 boton_subir_rango1.pack(pady=3, expand=True)
-                boton_prepara_rango1 = tk.Button(self.frame_botones, text="VENTA", bg="Orange", command=lambda: objeto_funciones.subir_a_venta(self.lista_etiquetas_series_preparadas[0], self.lista_series_venta[0]))
+                boton_prepara_rango1 = tk.Button(self.frame_botones, text="VENTA", bg="Orange", command=lambda: objeto_funciones.subir_a_venta(self.lista_series_preparadas[0], self.lista_series_venta[0]))
                 boton_prepara_rango1.pack(pady=3, expand=True)
-                boton_bajar_rango1 = tk.Button(self.frame_botones, image=self.photoBaja, command=lambda ident =0: objeto_funciones.restar_etiqueta(ident, self.lista_etiquetas_series_preparadas[0]))
+                boton_bajar_rango1 = tk.Button(self.frame_botones, image=self.photoBaja, command=lambda ident =0: objeto_funciones.restar_etiqueta(ident, self.lista_series_preparadas[0]))
                 boton_bajar_rango1.pack(pady=3, expand=True) 
             
             elif i > 0 and i < 9:
@@ -288,21 +290,21 @@ class Ventana():
                 etiqueta_rotulo_series.pack(expand=True)
                 etiqueta_series = tk.Label(self.frame_botones, text="0", fg="blue", bg = "white", font=("Times New Roman",17,"bold"))
                 etiqueta_series.pack(expand=True)
-                self.lista_etiquetas_series_preparadas.append(etiqueta_series)
+                self.lista_series_preparadas.append(etiqueta_series)
 
                 for j in range(3):
                     identificador = f"{i}_{j}"
                     if j == 0:
-                        boton = tk.Button(self.frame_botones, image=self.photoSube, command=lambda ident=identificador, i=i: objeto_funciones.incrementar_etiqueta(ident, self.lista_etiquetas_series_preparadas[i]))
+                        boton = tk.Button(self.frame_botones, image=self.photoSube, command=lambda ident=identificador, i=i: objeto_funciones.incrementar_etiqueta(ident, self.lista_series_preparadas[i]))
                     elif j == 1:
-                        boton = tk.Button(self.frame_botones, text="VENTA", bg="Orange", command=lambda ident=identificador, i=i: objeto_funciones.subir_a_venta(self.lista_etiquetas_series_preparadas[i], self.lista_series_venta[i]))
+                        boton = tk.Button(self.frame_botones, text="VENTA", bg="Orange", command=lambda ident=identificador, i=i: objeto_funciones.subir_a_venta(self.lista_series_preparadas[i], self.lista_series_venta[i]))
                     else:
-                        boton = tk.Button(self.frame_botones, image=self.photoBaja, command=lambda ident=identificador, i=i: objeto_funciones.restar_etiqueta(ident, self.lista_etiquetas_series_preparadas[i]))
+                        boton = tk.Button(self.frame_botones, image=self.photoBaja, command=lambda ident=identificador, i=i: objeto_funciones.restar_etiqueta(ident, self.lista_series_preparadas[i]))
                     
                     boton.pack(pady=3, expand=True)
 
             elif i == 9:
-                boton_comenzar = tk.Button(self.frame_botones, text="VENTA", bg="Orange", width=10, height=2)
+                boton_comenzar = tk.Button(self.frame_botones, text="VENTA", bg="Orange", width=10, height=2, command=lambda: objeto_funciones.suber_todo_a_venta(self.lista_series_preparadas,self.lista_series_venta, self.lista_Entry_carton_salida))
                 boton_comenzar.pack(expand=True)
 
             elif i == 10:
