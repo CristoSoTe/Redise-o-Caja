@@ -27,13 +27,26 @@ class MisFunciones:
         valor_actual = etiqueta1["text"]
         etiqueta2["text"] = valor_actual
 
-    def suber_todo_a_venta(self, lista_origen, lista_destino, salida):
+    def suber_todo_a_venta(self, lista_series_botones, lista_series_venta, salida, lista_carton_salidas):
 
-        for label_origen, label_destino in zip(lista_origen, lista_destino):
+        #copia todas las series preparadas en el frame de los botones y las sube a venta
+        for label_origen, label_destino in zip(lista_series_botones, lista_series_venta):
             texto_origen = label_origen.cget("text")
             label_destino.config(text=texto_origen)
+
+        #extraer el carton de salida para enviarlo a la funcion pico_salida 
         salida_rango1=salida[1].get()
-        self.pico_salida(salida_rango1)
+        pico_salida_definitivo = self.pico_salida(salida_rango1)
+        dato = (int(lista_series_venta[0].cget("text")) * 6) + pico_salida_definitivo
+
+        #Hay que trabajar en esto porque no funciona cuando se vuelve a bajar a cero
+        if lista_series_venta[1] == 0:
+            lista_carton_salidas[0].config(text = "0")
+        else:
+            lista_carton_salidas[0].config(text = dato) 
+
+
+
 
     def pico_salida(self, salida):
         try:
@@ -45,9 +58,10 @@ class MisFunciones:
                     self.pico_sal = 1
                 elif self.pico_sal == 6:
                     self.pico_sal = 0
+                return self.pico_sal
         except:
             pass
-        print(self.pico_sal)
+
 
     def pico_cierre(self, cierre):
         try:

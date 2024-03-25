@@ -304,7 +304,7 @@ class Ventana():
                     boton.pack(pady=3, expand=True)
 
             elif i == 9:
-                boton_comenzar = tk.Button(self.frame_botones, text="VENTA", bg="Orange", width=10, height=2, command=lambda: objeto_funciones.suber_todo_a_venta(self.lista_series_preparadas,self.lista_series_venta, self.lista_Entry_carton_salida))
+                boton_comenzar = tk.Button(self.frame_botones, text="VENTA", bg="Orange", width=10, height=2, command=lambda: objeto_funciones.suber_todo_a_venta(self.lista_series_preparadas,self.lista_series_venta, self.lista_Entry_carton_salida, self.lista_carton_salida_2_al_cierre))
                 boton_comenzar.pack(expand=True)
 
             elif i == 10:
