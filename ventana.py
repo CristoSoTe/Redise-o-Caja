@@ -178,6 +178,7 @@ class Ventana():
                     self.Entry_carton_salida = tk.Entry(self.frame_columna4, text="", fg="blue", bg = "white", font=("Times New Roman",17,"bold"), width=6, justify="right")
                     self.Entry_carton_salida.pack(pady=19)
                     self.lista_Entry_carton_salida.append(self.Entry_carton_salida)
+                    self.lista_Entry_carton_salida[h].insert(0, 1)
 
             if i > 0 and i < 9:
                 # COLUMNA RANGOS DEL 2 AL 9
@@ -302,7 +303,7 @@ class Ventana():
                     boton.pack(pady=3, expand=True)
 
             elif i == 9:
-                boton_comenzar = tk.Button(self.frame_botones, text="VENTA", bg="Orange", width=10, height=2)
+                boton_comenzar = tk.Button(self.frame_botones, text="VENTA", bg="Orange", width=10, height=2, command=lambda: objeto_funciones.subir_todas_a_venta(self.lista_etiquetas_series_preparadas, self.lista_series_venta))
                 boton_comenzar.pack(expand=True)
 
             elif i == 10:
