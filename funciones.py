@@ -57,24 +57,28 @@ class MisFunciones:
         #--SALIDAS DE 1,5€
         #Calcula e imprime el carton de salida del rango 2, precio a 1,5€
         #Hay que calcular por separado el carton de salida del rango 2 por el pico de salida 
-        salida_rango2 = (int(lista_series_venta[0].cget("text")) * 6) + self.pico_salida(salida[1].get())
+        salida_rango2 = (int(lista_series_venta[0].cget("text")) * 6) + self.pico_salida(salida[1].get()) + int(salida[1].get())
         if lista_series_venta[1].cget("text") == "0":
             lista_carton_salidas[0].config(text = "0")
         else:
             lista_carton_salidas[0].config(text = salida_rango2)
 
         #Calcula e imprime el carton de salida del rango 3 al 9
+        salida_rango_anterior = salida_rango2
         indice_carton_salida = 4
+        valor = 1
         for i in range(7):
-            print(i)
-            
             if lista_series_venta[i+2].cget("text") == "0":
                 lista_carton_salidas[indice_carton_salida].config(text="0")
                 indice_carton_salida += 4
+                valor -= 1
+                
             else:
-                carton_salida = int(lista_carton_salidas[indice_carton_salida - 4].cget("text")) + int(lista_series_venta[i+1].cget("text")) * 6
+                carton_salida = int(salida_rango_anterior) + int(lista_series_venta[i+valor].cget("text")) * 6
                 lista_carton_salidas[indice_carton_salida].config(text=carton_salida)
                 indice_carton_salida += 4
+                salida_rango_anterior = carton_salida
+                valor = 1
 
     def pico_salida(self, salida):
         try:
@@ -89,7 +93,6 @@ class MisFunciones:
                 return self.pico_sal
         except:
             pass
-
 
     def pico_cierre(self, cierre):
         try:

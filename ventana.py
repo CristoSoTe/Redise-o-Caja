@@ -10,8 +10,8 @@ class Ventana():
         self.ventana.attributes('-fullscreen', True)
         #self.ventana.geometry("1600x900")
 
-        self.photoSube=tk.PhotoImage(file=r"/home/redinf/Copilot/Redise-o-Caja/flechaSube.png")#C:\Users\crist\OneDrive\Escritorio\CajaCopilot\flechaSaja.png
-        self.photoBaja=tk.PhotoImage(file=r"/home/redinf/Copilot/Redise-o-Caja/flechaBaja.png")#C:\Users\crist\OneDrive\Escritorio\CajaCopilot\flechaBaja.png
+        self.photoSube=tk.PhotoImage(file=r"C:\Users\crist\OneDrive\Escritorio\CajaCopilot\flechaSube.png")#/home/redinf/Copilot/Redise-o-Caja/flechaSube.png
+        self.photoBaja=tk.PhotoImage(file=r"C:\Users\crist\OneDrive\Escritorio\CajaCopilot\flechaBaja.png")#/home/redinf/Copilot/Redise-o-Caja/flechaBaja.png
 
         #---CONFIGURACION DE LAS COLUMNAS
         for i in range(7):
@@ -180,7 +180,7 @@ class Ventana():
                     self.lista_Entry_carton_salida.append(self.Entry_carton_salida)
                     self.lista_Entry_carton_salida[h].insert(0, 1)
                     self.Entry_carton_salida.delete(0, tk.END)  # Borra el contenido actual del Entry
-                    self.Entry_carton_salida.insert(0, 4) 
+                    self.Entry_carton_salida.insert(0, 8) 
 
 
             if i > 0 and i < 9:
