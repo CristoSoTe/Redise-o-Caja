@@ -306,8 +306,8 @@ class Ventana():
                     boton.pack(pady=3, expand=True)
 
             elif i == 9:
-                boton_comenzar = tk.Button(self.frame_botones, text="VENTA", bg="Orange", width=10, height=2, command=lambda: objeto_funciones.subir_todas_a_venta(self.lista_etiquetas_series_preparadas, self.lista_series_venta))
-                boton_comenzar = tk.Button(self.frame_botones, text="VENTA", bg="Orange", width=10, height=2, command=lambda: objeto_funciones.suber_todo_a_venta(self.lista_series_preparadas,self.lista_series_venta, self.lista_Entry_carton_salida, self.lista_carton_salida_2_al_cierre))
+                #boton_comenzar = tk.Button(self.frame_botones, text="VENTA", bg="Orange", width=10, height=2, command=lambda: objeto_funciones.subir_todas_a_venta(self.lista_etiquetas_series_preparadas, self.lista_series_venta))
+                boton_comenzar = tk.Button(self.frame_botones, text="VENTA", bg="Orange", width=10, height=2, command=lambda: objeto_funciones.subir_todo_a_venta(self.lista_series_preparadas,self.lista_series_venta, self.lista_Entry_carton_salida, self.lista_carton_salida_2_al_cierre, self.entradas))
                 boton_comenzar.pack(expand=True)
 
             elif i == 10:
@@ -341,10 +341,13 @@ class Ventana():
             valor_columna += 1
 
             self.entradas.append(entrada)
+            
 
             if valor_columna > 11:
                 valor_fila = 1
                 valor_columna = 0
+        self.entradas[7].delete(0, tk.END)  # Borra el contenido actual del Entry
+        self.entradas[7].insert(0, 122)
 
         self.frame_columna8 = tk.Frame(self.ventana, bg="blue")
         self.frame_columna8.grid(row=8, column=0, columnspan=11, sticky="nsew")
