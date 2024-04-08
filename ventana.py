@@ -10,8 +10,8 @@ class Ventana():
         self.ventana.attributes('-fullscreen', True)
         #self.ventana.geometry("1600x900")
 
-        self.photoSube=tk.PhotoImage(file=r"C:\Users\crist\OneDrive\Escritorio\CajaCopilot\flechaSube.png")#/home/redinf/Copilot/Redise-o-Caja/flechaSube.png
-        self.photoBaja=tk.PhotoImage(file=r"C:\Users\crist\OneDrive\Escritorio\CajaCopilot\flechaBaja.png")#/home/redinf/Copilot/Redise-o-Caja/flechaBaja.png
+        self.photoSube=tk.PhotoImage(file=r"/home/cristo/Descargas/Redise-o-Caja/flechaSube.png")#/home/redinf/Copilot/Redise-o-Caja/flechaSube.png
+        self.photoBaja=tk.PhotoImage(file=r"/home/cristo/Descargas/Redise-o-Caja/flechaBaja.png")#/home/redinf/Copilot/Redise-o-Caja/flechaBaja.png
 
         #---CONFIGURACION DE LAS COLUMNAS
         for i in range(7):
