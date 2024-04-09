@@ -27,12 +27,14 @@ class MisFunciones:
         #---SUBE A VENTA POR RANGO
         valor_actual = etiqueta1["text"]
         etiqueta2["text"] = valor_actual
+        self.subir_todo_a_venta()
 
-    def subir_todas_a_venta(self, lista_inferior, lista_venta):
-        #---SUBE TODOS LOS RANGOS A VENTA
-        for i in range(len(lista_inferior)):
-            texto_origen = lista_inferior[i].cget("text")
-            lista_venta[i].config(text=texto_origen)
+    def subir_todo_a_venta(self, lista_series_botones, lista_series_venta, salida, lista_carton_salidas):
+        #copia todas las series preparadas en el frame de los botones y las sube a venta
+        for label_origen, label_destino in zip(lista_series_botones, lista_series_venta):
+            texto_origen = label_origen.cget("text")
+            label_destino.config(text=texto_origen)
+        self.cartones_salidas(lista_series_venta, salida, lista_carton_salidas)
 
     def pico_salida(self, salida):
         try:
@@ -47,12 +49,7 @@ class MisFunciones:
         except:
             pass
 
-    def subir_todo_a_venta(self, lista_series_botones, lista_series_venta, salida, lista_carton_salidas, cierre):
-
-        #copia todas las series preparadas en el frame de los botones y las sube a venta
-        for label_origen, label_destino in zip(lista_series_botones, lista_series_venta):
-            texto_origen = label_origen.cget("text")
-            label_destino.config(text=texto_origen)
+    def cartones_salidas(self, lista_series_venta, salida, lista_carton_salidas):
 
         indice_carton_salida = 4 #esta variable es para saltar a la casilla que le corresponde en el carton de salida
         for i in range(4):
@@ -78,14 +75,36 @@ class MisFunciones:
                     valor = 1
 
                 indice_carton_salida += 4
+                # Calculamos e imprimimos el carton de salida del cierre de todos los precios
                 if indice_carton_salida == 32:
-                    salida_cierre = self.pico_cierre(cierre[7].get()) #a partir de aqui faltan datos para calcular el carton de salida al cierre
+                    salida_cierre = carton_salida + int(lista_series_venta[i+valor].cget("text")) * 6
+                    #La salida del carton del rango de cierre esta mal, i+valor no da bien en todas las ocasiones
                     lista_carton_salidas[32].config(text=salida_cierre)
                     indice_carton_salida = 5
                 elif indice_carton_salida == 33:
+                    salida_cierre = carton_salida + int(lista_series_venta[i+valor].cget("text")) * 6
+                    lista_carton_salidas[33].config(text=salida_cierre)
                     indice_carton_salida = 6
                 elif indice_carton_salida == 34:
+                    salida_cierre = carton_salida + int(lista_series_venta[i+valor].cget("text")) * 6
+                    lista_carton_salidas[34].config(text=salida_cierre)
                     indice_carton_salida = 7
+                elif indice_carton_salida == 35:
+                    salida_cierre = carton_salida + int(lista_series_venta[i+valor].cget("text")) * 6
+                    lista_carton_salidas[35].config(text=salida_cierre)
+                    #indice_carton_salida = 7
+
+    def cierre_partida(self, lista_series_venta, lista_series_liquidacion):
+        for label_origen, label_destino in zip(lista_series_venta, lista_series_liquidacion):
+            texto_origen = label_origen.cget("text")
+            label_destino.config(text=texto_origen)
+
+        # Calculamos e imprimimos el total de series al cierre
+        #total_series = 0
+        #for i in range(9):
+            #total_series += int(lista_series_venta[i].cget("text"))
+            #lista_series_venta[9].config(text=total_series)
+
             
 
     def pico_salida(self, salida):

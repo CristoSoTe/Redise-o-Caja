@@ -72,9 +72,7 @@ class Ventana():
 
                 self.cartones_liquidacion_rango1 = tk.Label(self.frame_columna2, text=0, fg="blue", bg = "white", font=("Times New Roman",13,"bold"), width=8)
                 self.cartones_liquidacion_rango1.pack(expand=True)
-                self.lista_cartones_liquidacion.append(self.cartones_liquidacion_rango1)
-
-                #linea_divisoria(self.frame_columna2) 
+                self.lista_cartones_liquidacion.append(self.cartones_liquidacion_rango1) 
 
             if i > 0 and i < 9:
                 # COLUMNA RANGOS DEL 2 AL 9
@@ -179,8 +177,8 @@ class Ventana():
                     self.Entry_carton_salida.pack(pady=19)
                     self.lista_Entry_carton_salida.append(self.Entry_carton_salida)
                     self.lista_Entry_carton_salida[h].insert(0, 1)
-                    self.Entry_carton_salida.delete(0, tk.END)  # Borra el contenido actual del Entry
-                    self.Entry_carton_salida.insert(0, 8) 
+                    #self.Entry_carton_salida.delete(0, tk.END)  # Borra el contenido actual del Entry
+                    #self.Entry_carton_salida.insert(0, 4) 
 
 
             if i > 0 and i < 9:
@@ -259,7 +257,7 @@ class Ventana():
         #---FRAME ENCABEZAMIENTO CON ETIQUETA VENTA---
         self.frame_columna5 = tk.Frame(self.ventana, bg="blue")
         self.frame_columna5.grid(row=4, column=0, columnspan=11, sticky="nsew")
-        self.boton_cierre = tk.Button(self.frame_columna5, text=f"CERRAR", font=("Times New Roman",18,"bold"), bg="green", fg="white" )
+        self.boton_cierre = tk.Button(self.frame_columna5, text=f"CERRAR", font=("Times New Roman",18,"bold"), bg="green", fg="white", command=lambda: objeto_funciones.cierre_partida(self.lista_series_venta, self.lista_numero_series_liquidacion))
         self.boton_cierre.pack(pady=2)
 
         #---FRAME BOTONES DE SUBIDA Y BAJADA DE SERIES
@@ -307,7 +305,7 @@ class Ventana():
 
             elif i == 9:
                 #boton_comenzar = tk.Button(self.frame_botones, text="VENTA", bg="Orange", width=10, height=2, command=lambda: objeto_funciones.subir_todas_a_venta(self.lista_etiquetas_series_preparadas, self.lista_series_venta))
-                boton_comenzar = tk.Button(self.frame_botones, text="VENTA", bg="Orange", width=10, height=2, command=lambda: objeto_funciones.subir_todo_a_venta(self.lista_series_preparadas,self.lista_series_venta, self.lista_Entry_carton_salida, self.lista_carton_salida_2_al_cierre, self.entradas))
+                boton_comenzar = tk.Button(self.frame_botones, text="VENTA", bg="Orange", width=10, height=2, command=lambda: objeto_funciones.subir_todo_a_venta(self.lista_series_preparadas,self.lista_series_venta, self.lista_Entry_carton_salida, self.lista_carton_salida_2_al_cierre))
                 boton_comenzar.pack(expand=True)
 
             elif i == 10:
@@ -346,8 +344,33 @@ class Ventana():
             if valor_columna > 11:
                 valor_fila = 1
                 valor_columna = 0
+        self.entradas[0].delete(0, tk.END)  # Borra el contenido actual del Entry
+        self.entradas[0].insert(0, 1.5)
+        self.entradas[1].delete(0, tk.END)  # Borra el contenido actual del Entry
+        self.entradas[1].insert(0, 3)
+        self.entradas[2].delete(0, tk.END)  # Borra el contenido actual del Entry
+        self.entradas[2].insert(0, 424)
+        self.entradas[3].delete(0, tk.END)  # Borra el contenido actual del Entry
+        self.entradas[3].insert(0, 636)
+        self.entradas[4].delete(0, tk.END)  # Borra el contenido actual del Entry
+        self.entradas[4].insert(0, 110)
+        self.entradas[5].delete(0, tk.END)  # Borra el contenido actual del Entry
+        self.entradas[5].insert(0, 100)
+        self.entradas[6].delete(0, tk.END)  # Borra el contenido actual del Entry
+        self.entradas[6].insert(0, 428)
         self.entradas[7].delete(0, tk.END)  # Borra el contenido actual del Entry
-        self.entradas[7].insert(0, 122)
+        self.entradas[7].insert(0, 426)
+        self.entradas[8].delete(0, tk.END)  # Borra el contenido actual del Entry
+        self.entradas[8].insert(0, 4)
+        self.entradas[9].delete(0, tk.END)  # Borra el contenido actual del Entry
+        self.entradas[9].insert(0, 630)
+        self.entradas[10].delete(0, tk.END)  # Borra el contenido actual del Entry
+        self.entradas[10].insert(0, 250)
+        self.entradas[11].delete(0, tk.END)  # Borra el contenido actual del Entry
+        self.entradas[11].insert(0, 100)
+        #self.entradas[12].delete(0, tk.END)  # Borra el contenido actual del Entry
+        #self.entradas[12].insert(0, 3)
+        
 
         self.frame_columna8 = tk.Frame(self.ventana, bg="blue")
         self.frame_columna8.grid(row=8, column=0, columnspan=11, sticky="nsew")
