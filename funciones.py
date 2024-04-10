@@ -27,7 +27,7 @@ class MisFunciones:
         #---SUBE A VENTA POR RANGO
         valor_actual = etiqueta1["text"]
         etiqueta2["text"] = valor_actual
-        self.subir_todo_a_venta()
+        self.subir_todo_a_venta(lista_series_venta, salida, lista_carton_salidas)
 
     def subir_todo_a_venta(self, lista_series_botones, lista_series_venta, salida, lista_carton_salidas):
         #copia todas las series preparadas en el frame de los botones y las sube a venta
@@ -52,24 +52,26 @@ class MisFunciones:
     def cartones_salidas(self, lista_series_venta, salida, lista_carton_salidas):
 
         indice_carton_salida = 4 #esta variable es para saltar a la casilla que le corresponde en el carton de salida
+        valor = 1 #Esta variable es para corregir cuando un rango no tiene series
         for i in range(4):
-            #Calcula e imprime el carton de salida del rango 2 de todos los precios, por separado, por el pico de salida del rango 1
+            #Calcula e imprime el carton de salida del rango 2 de todos los precios separado del resto de rangos por el pico de salida del rango 1
             salida_rango2 = (int(lista_series_venta[0].cget("text")) * 6) + self.pico_salida(salida[i].get()) + int(salida[i].get())
             if lista_series_venta[1].cget("text") == "0":
                 lista_carton_salidas[i].config(text = "0")
+                valor -= 1
             else:
                 lista_carton_salidas[i].config(text = salida_rango2)
+                valor = 1
 
             #Calcula e imprime el carton de salida del rango 3 al 9 de todos los precios
             salida_rango_anterior = salida_rango2
-            valor = 1 #Esta variable es para corregir cuando un rango no tiene series
-            for i in range(7):
-                if lista_series_venta[i+2].cget("text") == "0":
+            for h in range(7):
+                if lista_series_venta[h+2].cget("text") == "0":
                     lista_carton_salidas[indice_carton_salida].config(text="0")
                     valor -= 1
                     
                 else:
-                    carton_salida = int(salida_rango_anterior) + int(lista_series_venta[i+valor].cget("text")) * 6
+                    carton_salida = int(salida_rango_anterior) + int(lista_series_venta[h+valor].cget("text")) * 6
                     lista_carton_salidas[indice_carton_salida].config(text=carton_salida)
                     salida_rango_anterior = carton_salida
                     valor = 1
@@ -77,22 +79,20 @@ class MisFunciones:
                 indice_carton_salida += 4
                 # Calculamos e imprimimos el carton de salida del cierre de todos los precios
                 if indice_carton_salida == 32:
-                    salida_cierre = carton_salida + int(lista_series_venta[i+valor].cget("text")) * 6
-                    #La salida del carton del rango de cierre esta mal, i+valor no da bien en todas las ocasiones
+                    salida_cierre = salida_rango_anterior + int(lista_series_venta[valor].cget("text")) * 6
                     lista_carton_salidas[32].config(text=salida_cierre)
                     indice_carton_salida = 5
                 elif indice_carton_salida == 33:
-                    salida_cierre = carton_salida + int(lista_series_venta[i+valor].cget("text")) * 6
+                    salida_cierre = salida_rango_anterior + int(lista_series_venta[valor].cget("text")) * 6
                     lista_carton_salidas[33].config(text=salida_cierre)
                     indice_carton_salida = 6
                 elif indice_carton_salida == 34:
-                    salida_cierre = carton_salida + int(lista_series_venta[i+valor].cget("text")) * 6
+                    salida_cierre = salida_rango_anterior + int(lista_series_venta[valor].cget("text")) * 6
                     lista_carton_salidas[34].config(text=salida_cierre)
                     indice_carton_salida = 7
                 elif indice_carton_salida == 35:
-                    salida_cierre = carton_salida + int(lista_series_venta[i+valor].cget("text")) * 6
+                    salida_cierre = salida_rango_anterior + int(lista_series_venta[valor].cget("text")) * 6
                     lista_carton_salidas[35].config(text=salida_cierre)
-                    #indice_carton_salida = 7
 
     def cierre_partida(self, lista_series_venta, lista_series_liquidacion):
         for label_origen, label_destino in zip(lista_series_venta, lista_series_liquidacion):
