@@ -58,41 +58,49 @@ class MisFunciones:
             salida_rango2 = (int(lista_series_venta[0].cget("text")) * 6) + self.pico_salida(salida[i].get()) + int(salida[i].get())
             if lista_series_venta[1].cget("text") == "0":
                 lista_carton_salidas[i].config(text = "0")
+                salida_rango_anterior = int(salida[i].get())
                 valor -= 1
             else:
                 lista_carton_salidas[i].config(text = salida_rango2)
+                salida_rango_anterior = salida_rango2
                 valor = 1
 
             #Calcula e imprime el carton de salida del rango 3 al 9 de todos los precios
-            salida_rango_anterior = salida_rango2
+            
             for h in range(7):
                 if lista_series_venta[h+2].cget("text") == "0":
                     lista_carton_salidas[indice_carton_salida].config(text="0")
                     valor -= 1
-                    
                 else:
                     carton_salida = int(salida_rango_anterior) + int(lista_series_venta[h+valor].cget("text")) * 6
                     lista_carton_salidas[indice_carton_salida].config(text=carton_salida)
-                    salida_rango_anterior = carton_salida
                     valor = 1
 
-                indice_carton_salida += 4
+                    salida_rango_anterior = carton_salida
+                    
                 # Calculamos e imprimimos el carton de salida del cierre de todos los precios
-                if indice_carton_salida == 32:
-                    salida_cierre = salida_rango_anterior + int(lista_series_venta[valor].cget("text")) * 6
+                if indice_carton_salida == 28:
+                    salida_cierre = salida_rango_anterior + int(lista_series_venta[h+valor+1].cget("text")) * 6
                     lista_carton_salidas[32].config(text=salida_cierre)
-                    indice_carton_salida = 5
-                elif indice_carton_salida == 33:
-                    salida_cierre = salida_rango_anterior + int(lista_series_venta[valor].cget("text")) * 6
+                    valor = 1
+                    indice_carton_salida = 1
+                elif indice_carton_salida == 29:
+                    salida_cierre = salida_rango_anterior + int(lista_series_venta[h+valor+1].cget("text")) * 6
                     lista_carton_salidas[33].config(text=salida_cierre)
-                    indice_carton_salida = 6
-                elif indice_carton_salida == 34:
-                    salida_cierre = salida_rango_anterior + int(lista_series_venta[valor].cget("text")) * 6
+                    valor = 1
+                    indice_carton_salida = 2
+                elif indice_carton_salida == 30:
+                    salida_cierre = salida_rango_anterior + int(lista_series_venta[h+valor+1].cget("text")) * 6
                     lista_carton_salidas[34].config(text=salida_cierre)
-                    indice_carton_salida = 7
-                elif indice_carton_salida == 35:
-                    salida_cierre = salida_rango_anterior + int(lista_series_venta[valor].cget("text")) * 6
+                    valor = 1
+                    indice_carton_salida = 3
+                elif indice_carton_salida == 31:
+                    salida_cierre = salida_rango_anterior + int(lista_series_venta[h+valor+1].cget("text")) * 6
                     lista_carton_salidas[35].config(text=salida_cierre)
+                    valor = 1
+                    break
+
+                indice_carton_salida += 4
 
     def cierre_partida(self, lista_series_venta, lista_series_liquidacion):
         for label_origen, label_destino in zip(lista_series_venta, lista_series_liquidacion):
