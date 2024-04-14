@@ -40,7 +40,7 @@ class Ventana():
         self.etiqueta_zona_venta = tk.Label(self.frame_columna1, text="LIQUIDACIÓN", font=("Times New Roman",18,"bold"), bg="blue", fg="white" ) # Etiqueta numero de rango en liquidacion
         self.etiqueta_zona_venta.pack(fill="both", expand=True, pady=5)
 
-        objeto_funciones = MisFunciones(self.ventana)
+        objeto_funciones = MisFunciones(self.ventana, self.lista_series_preparadas,self.lista_series_venta)
 
         #----FRAME LIQUIACIÓN POR RANGOS---
         colores = ["gray59", "#C0C0C0"]
@@ -261,7 +261,6 @@ class Ventana():
         self.boton_cierre.pack(pady=2)
 
         #---FRAME BOTONES DE SUBIDA Y BAJADA DE SERIES
-        self.lista_series_preparadas = []
         for i in range(11):
             color = colores[i % 2]  # Alternar entre los dos colores
             self.frame_botones = tk.Frame(self.ventana, bg=color, bd=2, relief="groove")
@@ -305,7 +304,7 @@ class Ventana():
 
             elif i == 9:
                 #boton_comenzar = tk.Button(self.frame_botones, text="VENTA", bg="Orange", width=10, height=2, command=lambda: objeto_funciones.subir_todas_a_venta(self.lista_etiquetas_series_preparadas, self.lista_series_venta))
-                boton_comenzar = tk.Button(self.frame_botones, text="VENTA", bg="Orange", width=10, height=2, command=lambda: objeto_funciones.subir_todo_a_venta(self.lista_series_preparadas,self.lista_series_venta, self.lista_Entry_carton_salida, self.lista_carton_salida_2_al_cierre))
+                boton_comenzar = tk.Button(self.frame_botones, text="VENTA", bg="Red", width=10, height=2, command=objeto_funciones.subir_todo_a_venta)#=lambda: self.lista_series_preparadas,self.lista_series_venta, self.lista_Entry_carton_salida, self.lista_carton_salida_2_al_cierre
                 boton_comenzar.pack(expand=True)
 
             elif i == 10:

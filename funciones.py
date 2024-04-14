@@ -1,8 +1,11 @@
 import tkinter as tk
 
 class MisFunciones:
-    def __init__(self, ventana):
+    def __init__(self, ventana, lista_series_botones, lista_series_venta):
         self.ventana = ventana
+        self.lista_series_botones = lista_series_botones
+        self.lista_series_venta = lista_series_venta
+        #print(self.lista_series_botones[1])
 
     def incrementar_etiqueta(self, ident, etiqueta):
         """
@@ -27,14 +30,20 @@ class MisFunciones:
         #---SUBE A VENTA POR RANGO
         valor_actual = etiqueta1["text"]
         etiqueta2["text"] = valor_actual
-        self.subir_todo_a_venta(lista_series_venta, salida, lista_carton_salidas)
+        #self.subir_todo_a_venta(lista_series_venta, salida, lista_carton_salidas)
 
-    def subir_todo_a_venta(self, lista_series_botones, lista_series_venta, salida, lista_carton_salidas):
+    def subir_todo_a_venta(self):#, lista_series_botones, lista_series_venta, salida, lista_carton_salidas
         #copia todas las series preparadas en el frame de los botones y las sube a venta
+        """
         for label_origen, label_destino in zip(lista_series_botones, lista_series_venta):
             texto_origen = label_origen.cget("text")
             label_destino.config(text=texto_origen)
         self.cartones_salidas(lista_series_venta, salida, lista_carton_salidas)
+        """
+        for label_origen, label_destino in zip(self.lista_series_botones, self.lista_series_venta):
+            texto_origen = label_origen.cget("text")
+            label_destino.config(text=texto_origen)
+        #self.cartones_salidas(lista_series_venta, salida, lista_carton_salidas)
 
     def pico_salida(self, salida):
         try:
@@ -50,7 +59,6 @@ class MisFunciones:
             pass
 
     def cartones_salidas(self, lista_series_venta, salida, lista_carton_salidas):
-
         indice_carton_salida = 4 #esta variable es para saltar a la casilla que le corresponde en el carton de salida
         valor = 1 #Esta variable es para corregir cuando un rango no tiene series
         for i in range(4):
