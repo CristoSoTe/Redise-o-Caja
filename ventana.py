@@ -41,7 +41,7 @@ class Ventana():
         self.etiqueta_zona_venta.pack(fill="both", expand=True, pady=5)
 
         objeto_funciones = MisFunciones(self.ventana, self.lista_series_preparadas,self.lista_series_venta,self.lista_Entry_carton_salida,
-            self.lista_carton_salida_2_al_cierre, self.lista_numero_series_liquidacion)
+            self.lista_carton_salida_2_al_cierre, self.lista_carton_salida_siguiente_2_al_cierre, self.lista_numero_series_liquidacion)
 
         #----FRAME LIQUIACIÓN POR RANGOS---
         colores = ["gray59", "#C0C0C0"]
@@ -219,11 +219,11 @@ class Ventana():
             if i == 9:
                 #COLUMNA RANGO CIERRE
                 self.frame_columna4.config(bg="#00FFFF")
-                self.etiqueta_rotulo_titulo_cierre = tk.Label(self.frame_columna4, text=f"SERIES", font=("Times New Roman",13,"bold"), bg="#00FFFF") # Etiqueta numero de rango en liquidacion
-                self.etiqueta_rotulo_titulo_cierre.pack()
+                self.etiqueta_rotulo_titulo_cierre = tk.Label(self.frame_columna4, text="", font=("Times New Roman",13,"bold"), bg="#00FFFF") # Etiqueta numero de rango en liquidacion
+                self.etiqueta_rotulo_titulo_cierre.pack(pady=15)
 
                 self.etiqueta_numero_series_por_rangos_cierre_venta = tk.Label(self.frame_columna4, text=0, fg="blue", bg = "white", font=("Times New Roman",17,"bold"), width=3)
-                self.etiqueta_numero_series_por_rangos_cierre_venta.pack()
+                #self.etiqueta_numero_series_por_rangos_cierre_venta.pack()
                 self.lista_series_venta.append(self.etiqueta_numero_series_por_rangos_cierre_venta)
 
                 self.etiquetas_salidas_cierre=tk.Label(self.frame_columna4, text = "SALIDAS", font=("Times New Roman", 15,"bold"), bg="#00FFFF")
