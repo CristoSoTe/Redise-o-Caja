@@ -33,6 +33,9 @@ class Ventana():
         # LISTAS ZONA DE BOTONES DE SUBIR Y BAJAR SERIES
         self.lista_series_preparadas = []
 
+        # LISTAS ZONA CM70
+        self.lista_cm70 = []
+
 
         #----FRAME ENCABEZAMIENTO CON ETIQUETA LIQUIDACIÓN---
         self.frame_columna1 = tk.Frame(self.ventana, bg="blue")
@@ -41,7 +44,8 @@ class Ventana():
         self.etiqueta_zona_venta.pack(fill="both", expand=True, pady=5)
 
         objeto_funciones = MisFunciones(self.ventana, self.lista_series_preparadas,self.lista_series_venta,self.lista_Entry_carton_salida,
-            self.lista_carton_salida_2_al_cierre, self.lista_carton_salida_siguiente_2_al_cierre, self.lista_numero_series_liquidacion)
+            self.lista_carton_salida_2_al_cierre, self.lista_carton_salida_siguiente_2_al_cierre, self.lista_numero_series_liquidacion, self.lista_cm70, 
+            self.lista_liquidacion_euros, self.lista_cartones_liquidacion)
 
         #----FRAME LIQUIACIÓN POR RANGOS---
         colores = ["gray59", "#C0C0C0"]
@@ -330,7 +334,6 @@ class Ventana():
         self.etiquetas_premios = ["PRECIO", "DEL", "IMPRESOS", "RECAUDADO", "PREMIO LINEA", "PRIMA", "VENDIDOS", "AL", "INFORMATICOS","CAJA IMPRESOS", "PREMIO BINGO", "PRIMA EXTRA"]
         valor_fila = 0
         valor_columna = 0
-        self.entradas = []
         for etiqueta_premio in self.etiquetas_premios:
             tk.Label(self.frame_columna7, text = etiqueta_premio, bg="blue", fg= "white", font=("Times New Roman",13,"bold"), anchor="e", justify="right").grid(row = valor_fila, column = valor_columna, sticky = "ew", padx= 10)
             valor_columna += 1
@@ -338,36 +341,36 @@ class Ventana():
             entrada.grid(row = valor_fila, column = valor_columna, sticky = "ew", pady=1)
             valor_columna += 1
 
-            self.entradas.append(entrada)
+            self.lista_cm70.append(entrada)
             
 
             if valor_columna > 11:
                 valor_fila = 1
                 valor_columna = 0
-        self.entradas[0].delete(0, tk.END)  # Borra el contenido actual del Entry
-        self.entradas[0].insert(0, 1.5)
-        self.entradas[1].delete(0, tk.END)  # Borra el contenido actual del Entry
-        self.entradas[1].insert(0, 3)
-        self.entradas[2].delete(0, tk.END)  # Borra el contenido actual del Entry
-        self.entradas[2].insert(0, 424)
-        self.entradas[3].delete(0, tk.END)  # Borra el contenido actual del Entry
-        self.entradas[3].insert(0, 636)
-        self.entradas[4].delete(0, tk.END)  # Borra el contenido actual del Entry
-        self.entradas[4].insert(0, 110)
-        self.entradas[5].delete(0, tk.END)  # Borra el contenido actual del Entry
-        self.entradas[5].insert(0, 100)
-        self.entradas[6].delete(0, tk.END)  # Borra el contenido actual del Entry
-        self.entradas[6].insert(0, 428)
-        self.entradas[7].delete(0, tk.END)  # Borra el contenido actual del Entry
-        self.entradas[7].insert(0, 426)
-        self.entradas[8].delete(0, tk.END)  # Borra el contenido actual del Entry
-        self.entradas[8].insert(0, 4)
-        self.entradas[9].delete(0, tk.END)  # Borra el contenido actual del Entry
-        self.entradas[9].insert(0, 630)
-        self.entradas[10].delete(0, tk.END)  # Borra el contenido actual del Entry
-        self.entradas[10].insert(0, 250)
-        self.entradas[11].delete(0, tk.END)  # Borra el contenido actual del Entry
-        self.entradas[11].insert(0, 100)
+        self.lista_cm70[0].delete(0, tk.END)  # Borra el contenido actual del Entry
+        self.lista_cm70[0].insert(0, 1.5)
+        self.lista_cm70[1].delete(0, tk.END)  # Borra el contenido actual del Entry
+        self.lista_cm70[1].insert(0, 3)
+        self.lista_cm70[2].delete(0, tk.END)  # Borra el contenido actual del Entry
+        self.lista_cm70[2].insert(0, 424)
+        self.lista_cm70[3].delete(0, tk.END)  # Borra el contenido actual del Entry
+        self.lista_cm70[3].insert(0, 636)
+        self.lista_cm70[4].delete(0, tk.END)  # Borra el contenido actual del Entry
+        self.lista_cm70[4].insert(0, 110)
+        self.lista_cm70[5].delete(0, tk.END)  # Borra el contenido actual del Entry
+        self.lista_cm70[5].insert(0, 100)
+        self.lista_cm70[6].delete(0, tk.END)  # Borra el contenido actual del Entry
+        self.lista_cm70[6].insert(0, 428)
+        self.lista_cm70[7].delete(0, tk.END)  # Borra el contenido actual del Entry
+        self.lista_cm70[7].insert(0, 426)
+        self.lista_cm70[8].delete(0, tk.END)  # Borra el contenido actual del Entry
+        self.lista_cm70[8].insert(0, 4)
+        self.lista_cm70[9].delete(0, tk.END)  # Borra el contenido actual del Entry
+        self.lista_cm70[9].insert(0, 630)
+        self.lista_cm70[10].delete(0, tk.END)  # Borra el contenido actual del Entry
+        self.lista_cm70[10].insert(0, 250)
+        self.lista_cm70[11].delete(0, tk.END)  # Borra el contenido actual del Entry
+        self.lista_cm70[11].insert(0, 100)
         #self.entradas[12].delete(0, tk.END)  # Borra el contenido actual del Entry
         #self.entradas[12].insert(0, 3)
         
