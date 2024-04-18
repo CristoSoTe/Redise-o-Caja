@@ -146,9 +146,16 @@ class MisFunciones:
 
                 indice_carton_salida += 4
     def calcula_liquidacion(self, pico_inicial):
-        euros_R1 = (int(self.lista_series_liquidacion[0].cget("text")) * 6 + int(pico_inicial)) * float(self.datos_cm70[0].get())
-        self.euros[0].config(text=euros_R1, "€")
-        
+        #Calcula la liquidacion del rango 1 por tener pico
+        euros_R1 = str("{:.2f}".format((int(self.lista_series_liquidacion[0].cget("text")) * 6 + int(pico_inicial)) * float(self.datos_cm70[0].get())))
+        simbolo = "€"
+        self.euros[0].config(text=euros_R1 + simbolo)
+
+        #Calcula la liquidacion del rango 2 al 9
+        for i in range(8):
+            euros_R2_al_9 = str("{:.2f}".format(int(self.lista_series_liquidacion[i+1].cget("text")) * 6 * float(self.datos_cm70[0].get())))
+            self.euros[i+1].config(text=euros_R2_al_9 + simbolo)
+
     def cartones_por_rango(self):
         carton_inicial = int(self.salida[0].get())
         pico_inicial = self.pico_salida(carton_inicial)
@@ -161,6 +168,13 @@ class MisFunciones:
         for label_origen, label_destino in zip(self.lista_series_venta, self.lista_series_liquidacion):
             texto_origen = label_origen.cget("text")
             label_destino.config(text=texto_origen)
+
+        #Calcula series del rango de cierre
+        #Estasintentyando calcular las series de cierre, no has probado el codigo de la linea 174 a 177
+        series_cierre = 0
+        for i in range(9):
+            series_cierre += int(self.datos_cm70[0].get()) - int(self.lista_series_liquidacion[i].cget("text")) - self.pico_salida(self.datos_cm70[1].get()) - self.pico_cierre(self.datos_cm70[7].get())
+            self.lista_series_liquidacion[9].config(text=series_cierre)
         self.cartones_por_rango()
 
         # Calculamos e imprimimos el total de series al cierre
