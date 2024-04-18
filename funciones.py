@@ -173,7 +173,8 @@ class MisFunciones:
         #Estasintentyando calcular las series de cierre, no has probado el codigo de la linea 174 a 177
         series_cierre = 0
         for i in range(9):
-            series_cierre += int(self.datos_cm70[0].get()) - int(self.lista_series_liquidacion[i].cget("text")) - self.pico_salida(self.datos_cm70[1].get()) - self.pico_cierre(self.datos_cm70[7].get())
+            series_cierre += (float(self.datos_cm70[0].get()) - int(self.lista_series_liquidacion[i].cget("text")) - self.pico_salida(self.datos_cm70[1].get()) - self.pico_cierre(self.datos_cm70[7].get())) / 6
+            print(series_cierre)
             self.lista_series_liquidacion[9].config(text=series_cierre)
         self.cartones_por_rango()
 
