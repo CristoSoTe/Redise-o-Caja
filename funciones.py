@@ -145,23 +145,16 @@ class MisFunciones:
                     break
 
                 indice_carton_salida += 4
-    def calcula_liquidacion(self, pico_inicial):#, pico_inicial
-        euros_R1 = (int(self.lista_series_liquidacion[0].cget("text")) * 6 + int(pico_inicial))# * self.cm70[0].cget("text")
-        self.euros[0].config(text=euros_R1)
-
-        #for i in range(len(self.euros)):
-        #    print("valor=", valor + i)
-        for i in range(5):
-            dato=self.datos_cm70[i].cget("text")
-            print(dato)
-        #self.euros[0].config(text=dato)
+    def calcula_liquidacion(self, pico_inicial):
+        euros_R1 = (int(self.lista_series_liquidacion[0].cget("text")) * 6 + int(pico_inicial)) * float(self.datos_cm70[0].get())
+        self.euros[0].config(text=euros_R1, "€")
         
     def cartones_por_rango(self):
         carton_inicial = int(self.salida[0].get())
         pico_inicial = self.pico_salida(carton_inicial)
         carton_final_R1 = carton_inicial + pico_inicial - 1 + int(self.lista_series_liquidacion[0].cget("text")) * 6
         self.cartones_rangos[0].config(text=str(carton_inicial) + " - " + str(carton_final_R1))
-        self.calcula_liquidacion(pico_inicial)#pico_inicial
+        self.calcula_liquidacion(pico_inicial)
 
 
     def cierre_partida(self):#, lista_series_venta, lista_series_liquidacion

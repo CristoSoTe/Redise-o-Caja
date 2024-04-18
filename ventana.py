@@ -348,7 +348,7 @@ class Ventana():
                 valor_fila = 1
                 valor_columna = 0
         self.lista_cm70[0].delete(0, tk.END)  # Borra el contenido actual del Entry
-        self.lista_cm70[0].insert(0, 1.5)
+        self.lista_cm70[0].insert(0, 2)
         self.lista_cm70[1].delete(0, tk.END)  # Borra el contenido actual del Entry
         self.lista_cm70[1].insert(0, 3)
         self.lista_cm70[2].delete(0, tk.END)  # Borra el contenido actual del Entry
