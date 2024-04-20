@@ -1,24 +1,26 @@
-class Ventana():
-    def __init__(self):
-        #super().__init__()
+import tkinter as tk
 
-        self.ventana = tk.Tk()
-        self.ventana.attributes('-fullscreen', True)
+# Crear la ventana
+root = tk.Tk()
 
-        self.lista_series_venta = []
-        self.lista_series_preparadas = []
+# Definir los textos
+variable1_text = "Variable1"
+variable2_text = "Variable2"
 
-        objeto_funciones = MisFunciones(self.ventana, self.lista_series_preparadas,self.lista_series_venta)
+# Crear el widget de texto
+text_widget = tk.Text(root)
+text_widget.pack()
 
-        boton_comenzar = tk.Button(self.frame_botones, text="VENTA", bg="Red", width=10, height=2, command=objeto_funciones.subir_todo_a_venta)
+# Insertar texto con diferentes fuentes
+text_widget.insert("end", variable1_text, "font_variable1")
+text_widget.insert("end", "-", "normal")
+text_widget.insert("end", variable2_text, "font_variable2")
 
-class MisFunciones:
-    def __init__(self, ventana, lista_series_botones, lista_series_venta):
-        self.ventana = ventana
-        self.lista_series_botones = lista_series_botones
-        self.lista_series_venta = lista_series_venta
+# Configurar las fuentes
+text_widget.tag_configure("font_variable1", font=("Arial", 12))
+text_widget.tag_configure("font_variable2", font=("Arial", 8))
 
-    def subir_todo_a_venta(self):
-        for label_origen, label_destino in zip(self.lista_series_botones, self.lista_series_venta):
-            texto_origen = label_origen.cget("text")
-            label_destino.config(text=texto_origen)
+# Deshabilitar la edición del widget de texto
+text_widget.config(state="disabled")
+
+root.mainloop()

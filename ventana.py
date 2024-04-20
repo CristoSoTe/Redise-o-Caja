@@ -181,7 +181,7 @@ class Ventana():
                     self.Entry_carton_salida = tk.Entry(self.frame_columna4, text="", fg="blue", bg = "white", font=("Times New Roman",17,"bold"), width=6, justify="right")
                     self.Entry_carton_salida.pack(pady=19)
                     self.lista_Entry_carton_salida.append(self.Entry_carton_salida)
-                    self.lista_Entry_carton_salida[h].insert(0, 1)
+                    self.lista_Entry_carton_salida[h].insert(0, 3)
                     #self.Entry_carton_salida.delete(0, tk.END)  # Borra el contenido actual del Entry
                     #self.Entry_carton_salida.insert(0, 4) 
 

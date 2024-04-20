@@ -146,8 +146,9 @@ class MisFunciones:
 
                 indice_carton_salida += 4
     def calcula_liquidacion(self, pico_inicial):
+        pico_cierre = self.pico_cierre(self.datos_cm70[7].get())
         #Calcula la liquidacion del rango 1 por tener pico
-        euros_R1 = str("{:.2f}".format((int(self.lista_series_liquidacion[0].cget("text")) * 6 + int(pico_inicial)) * float(self.datos_cm70[0].get())))
+        euros_R1 = str("{:.2f}".format((int(self.series) * 6 + int(pico_inicial)) * float(self.datos_cm70[0].get())))
         simbolo = "€"
         self.euros[0].config(text=euros_R1 + simbolo)
 
@@ -156,33 +157,47 @@ class MisFunciones:
             euros_R2_al_9 = str("{:.2f}".format(int(self.lista_series_liquidacion[i+1].cget("text")) * 6 * float(self.datos_cm70[0].get())))
             self.euros[i+1].config(text=euros_R2_al_9 + simbolo)
 
+        #Calcula liquidacion del cierre por tener pico
+        self.extrae_series_cierre = self.lista_series_liquidacion[9].cget("text").split("-")[0]
+        euros_cierre = str("{:.2f}".format((int(self.extrae_series_cierre) * 6 + int(pico_cierre)) * float(self.datos_cm70[0].get())))
+        simbolo = "€"
+        self.euros[9].config(text=euros_cierre + simbolo)
+
     def cartones_por_rango(self):
         carton_inicial = int(self.salida[0].get())
         pico_inicial = self.pico_salida(carton_inicial)
-        carton_final_R1 = carton_inicial + pico_inicial - 1 + int(self.lista_series_liquidacion[0].cget("text")) * 6
+
+        #La etiqueta contiene el numero de series, un guion y el pico de salida por lo que extraemos el numero de series
+        self.series = self.lista_series_liquidacion[0].cget("text").split("-")[0]
+        carton_final_R1 = carton_inicial + pico_inicial - 1 + int(self.series) * 6
         self.cartones_rangos[0].config(text=str(carton_inicial) + " - " + str(carton_final_R1))
         self.calcula_liquidacion(pico_inicial)
 
 
     def cierre_partida(self):#, lista_series_venta, lista_series_liquidacion
+        pico_salida = self.pico_salida(self.datos_cm70[1].get())
+        pico_cierre = self.pico_cierre(self.datos_cm70[7].get())
+
+        #Aqui sube todas las series de la zona de venta a la zona de liquidacion del rango 1 al 9 
         for label_origen, label_destino in zip(self.lista_series_venta, self.lista_series_liquidacion):
             texto_origen = label_origen.cget("text")
             label_destino.config(text=texto_origen)
-
+        
         #Calcula series del rango de cierre
-        #Estasintentyando calcular las series de cierre, no has probado el codigo de la linea 174 a 177
-        series_cierre = 0
+        series_asignadas = 0
+        #Primero sumamos las series que tiene asignado los rangos del 1 al 9
         for i in range(9):
-            series_cierre += (float(self.datos_cm70[0].get()) - int(self.lista_series_liquidacion[i].cget("text")) - self.pico_salida(self.datos_cm70[1].get()) - self.pico_cierre(self.datos_cm70[7].get())) / 6
-            print(series_cierre)
-            self.lista_series_liquidacion[9].config(text=series_cierre)
-        self.cartones_por_rango()
+            series_asignadas += int(self.lista_series_liquidacion[i].cget("text"))
+        series_cierre = 0
+        #Despues calculamos las series que le quedan al cierre
+        for i in range(9):
+            series_cierre = int(((float(self.datos_cm70[2].get())- pico_salida - pico_cierre)) / 6) - series_asignadas
+        self.lista_series_liquidacion[9].config(text=f"{series_cierre}-{pico_cierre}")
 
-        # Calculamos e imprimimos el total de series al cierre
-        #total_series = 0
-        #for i in range(9):
-            #total_series += int(lista_series_venta[i].cget("text"))
-            #lista_series_venta[9].config(text=total_series)
+        #Se corrige el numero de series en el rango 1 para poner el pico de salida en el texto
+        self.lista_series_liquidacion[0].config(text=f"{self.lista_series_liquidacion[0].cget('text')}-{pico_salida}")
+
+        self.cartones_por_rango()
 
     def pico_salida(self, salida):
         try:
@@ -204,7 +219,6 @@ class MisFunciones:
                 pass
             else:
                 self.pico_cie = (int(cierre) % 6)
-                print(self.pico_cie)
                 return self.pico_cie
         except:
             pass
