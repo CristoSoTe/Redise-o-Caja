@@ -145,34 +145,6 @@ class MisFunciones:
                     break
 
                 indice_carton_salida += 4
-    def calcula_liquidacion(self, pico_inicial):
-        pico_cierre = self.pico_cierre(self.datos_cm70[7].get())
-        #Calcula la liquidacion del rango 1 por tener pico
-        euros_R1 = str("{:.2f}".format((int(self.series) * 6 + int(pico_inicial)) * float(self.datos_cm70[0].get())))
-        simbolo = "€"
-        self.euros[0].config(text=euros_R1 + simbolo)
-
-        #Calcula la liquidacion del rango 2 al 9
-        for i in range(8):
-            euros_R2_al_9 = str("{:.2f}".format(int(self.lista_series_liquidacion[i+1].cget("text")) * 6 * float(self.datos_cm70[0].get())))
-            self.euros[i+1].config(text=euros_R2_al_9 + simbolo)
-
-        #Calcula liquidacion del cierre por tener pico
-        self.extrae_series_cierre = self.lista_series_liquidacion[9].cget("text").split("-")[0]
-        euros_cierre = str("{:.2f}".format((int(self.extrae_series_cierre) * 6 + int(pico_cierre)) * float(self.datos_cm70[0].get())))
-        simbolo = "€"
-        self.euros[9].config(text=euros_cierre + simbolo)
-
-    def cartones_por_rango(self):
-        carton_inicial = int(self.salida[0].get())
-        pico_inicial = self.pico_salida(carton_inicial)
-
-        #La etiqueta contiene el numero de series, un guion y el pico de salida por lo que extraemos el numero de series
-        self.series = self.lista_series_liquidacion[0].cget("text").split("-")[0]
-        carton_final_R1 = carton_inicial + pico_inicial - 1 + int(self.series) * 6
-        self.cartones_rangos[0].config(text=str(carton_inicial) + " - " + str(carton_final_R1))
-        self.calcula_liquidacion(pico_inicial)
-
 
     def cierre_partida(self):#, lista_series_venta, lista_series_liquidacion
         pico_salida = self.pico_salida(self.datos_cm70[1].get())
@@ -192,12 +164,49 @@ class MisFunciones:
         #Despues calculamos las series que le quedan al cierre
         for i in range(9):
             series_cierre = int(((float(self.datos_cm70[2].get())- pico_salida - pico_cierre)) / 6) - series_asignadas
-        self.lista_series_liquidacion[9].config(text=f"{series_cierre}-{pico_cierre}")
+        self.lista_series_liquidacion[9].config(text=f"{series_cierre}+{pico_cierre}")
 
         #Se corrige el numero de series en el rango 1 para poner el pico de salida en el texto
-        self.lista_series_liquidacion[0].config(text=f"{self.lista_series_liquidacion[0].cget('text')}-{pico_salida}")
+        self.lista_series_liquidacion[0].config(text=f"{self.lista_series_liquidacion[0].cget('text')}+{pico_salida}")
+
+        #Calculamos el total de series y la imprimimos
+        total_series = series_asignadas + series_cierre
+        self.lista_series_liquidacion[10].config(text=total_series)
 
         self.cartones_por_rango()
+
+    def cartones_por_rango(self):
+        carton_inicial = int(self.datos_cm70[1].get())
+        pico_inicial = self.pico_salida(carton_inicial)
+
+        #La etiqueta contiene el numero de series, un guion y el pico de salida por lo que extraemos el numero de series
+        self.series = self.lista_series_liquidacion[0].cget("text").split("+")[0]
+        carton_final_R1 = carton_inicial + pico_inicial - 1 + int(self.series) * 6
+        self.cartones_rangos[0].config(text=str(carton_inicial) + " - " + str(carton_final_R1))
+        
+        self.calcula_liquidacion(pico_inicial)
+
+    def calcula_liquidacion(self, pico_inicial):
+        pico_cierre = self.pico_cierre(self.datos_cm70[7].get())
+        #Calcula la liquidacion del rango 1 por tener pico
+        euros_R1 = str("{:.2f}".format((int(self.series) * 6 + int(pico_inicial)) * float(self.datos_cm70[0].get())))
+        simbolo = "€"
+        self.euros[0].config(text=euros_R1 + simbolo)
+
+        #Calcula la liquidacion del rango 2 al 9
+        for i in range(8):
+            euros_R2_al_9 = str("{:.2f}".format(int(self.lista_series_liquidacion[i+1].cget("text")) * 6 * float(self.datos_cm70[0].get())))
+            self.euros[i+1].config(text=euros_R2_al_9 + simbolo)
+
+        #Calcula liquidacion del cierre por tener pico
+        self.extrae_series_cierre = self.lista_series_liquidacion[9].cget("text").split("+")[0]
+        euros_cierre = str("{:.2f}".format((int(self.extrae_series_cierre) * 6 + int(pico_cierre)) * float(self.datos_cm70[0].get())))
+        simbolo = "€"
+        self.euros[9].config(text=euros_cierre + simbolo)
+
+        #Calcula el total liquidacion
+        total_liquidacion =  str("{:.2f}".format(float(self.datos_cm70[0].get()) * int(self.datos_cm70[2].get())))
+        self.euros[10].config(text=total_liquidacion + simbolo)
 
     def pico_salida(self, salida):
         try:
