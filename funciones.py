@@ -2,7 +2,7 @@ import tkinter as tk
 
 class MisFunciones:
     def __init__(self, ventana, lista_series_botones, lista_series_venta, lista_Entry_carton_salida, lista_carton_salidas, 
-        lista_carton_salida_siguiente, lista_series_liquidacion, datos_cm70, euros, cartones_rangos):
+        lista_carton_salida_siguiente, lista_series_liquidacion, datos_cm70, euros, cartones_rangos, frame_1, etiqueta_liquidacion):
         self.ventana = ventana
         self.lista_series_botones = lista_series_botones
         self.lista_series_venta = lista_series_venta
@@ -13,6 +13,8 @@ class MisFunciones:
         self.datos_cm70 = datos_cm70
         self.euros = euros
         self.cartones_rangos = cartones_rangos
+        self.frame1 = frame_1
+        self.etiqueta_liquidacion = etiqueta_liquidacion
 
     def incrementar_etiqueta(self, ident, etiqueta):
         #Incrementa el valor de la etiqueta en 1.
@@ -179,11 +181,28 @@ class MisFunciones:
         carton_inicial = int(self.datos_cm70[1].get())
         pico_inicial = self.pico_salida(carton_inicial)
 
-        #La etiqueta contiene el numero de series, un guion y el pico de salida por lo que extraemos el numero de series
+        #La etiqueta numero de series del rango 1 contiene el numero de series, un guion y el pico de salida por lo que extraemos el numero de series
         self.series = self.lista_series_liquidacion[0].cget("text").split("+")[0]
+        #Calculamos los cartones del rango 1 y los imprimimos
         carton_final_R1 = carton_inicial + pico_inicial - 1 + int(self.series) * 6
-        self.cartones_rangos[0].config(text=str(carton_inicial) + " - " + str(carton_final_R1))
-        
+        self.cartones_rangos[0].config(text=str(carton_inicial) + "-" + str(carton_final_R1))
+
+        #Calculamos los cartones del rango 2 al 9
+        carton_final_rango_anterior = carton_final_R1
+        for i in range(8):
+            if self.lista_series_liquidacion[i+1].cget("text") == "0":
+                self.cartones_rangos[i+1].config(text="0-0")
+            else:
+                carton_final_rango = int(self.lista_series_liquidacion[i+1].cget("text")) * 6 + carton_final_rango_anterior
+                self.cartones_rangos[i+1].config(text=str(carton_final_rango_anterior + 1) + "-" + str(carton_final_rango))
+                carton_final_rango_anterior = carton_final_rango
+
+        #Imprimimos los cartones asignados al cierre
+        self.cartones_rangos[9].config(text=str(carton_final_rango_anterior + 1) + "-" + self.datos_cm70[7].get())
+
+        #Imprimimos los cartones totales
+        self.cartones_rangos[10].config(text=self.datos_cm70[1].get() + "-" + self.datos_cm70[7].get())
+
         self.calcula_liquidacion(pico_inicial)
 
     def calcula_liquidacion(self, pico_inicial):
@@ -207,6 +226,22 @@ class MisFunciones:
         #Calcula el total liquidacion
         total_liquidacion =  str("{:.2f}".format(float(self.datos_cm70[0].get()) * int(self.datos_cm70[2].get())))
         self.euros[10].config(text=total_liquidacion + simbolo)
+
+        self.colores()
+
+    def colores(self):
+        if self.datos_cm70[0].get() == "1.5":
+            self.frame1.config(bg="blue")
+            self.etiqueta_liquidacion.config(bg="blue")
+        elif self.datos_cm70[0].get() == "2":
+            self.frame1.config(bg="#E7692C")
+            self.etiqueta_liquidacion.config(bg="#E7692C")
+        elif self.datos_cm70[0].get() == "3":
+            self.frame1.config(bg="#AF45D2")
+            self.etiqueta_liquidacion.config(bg="#AF45D2")
+        elif self.datos_cm70[0].get() == "6":
+            self.frame1.config(bg="#893E65")
+            self.etiqueta_liquidacion.config(bg="#893E65")
 
     def pico_salida(self, salida):
         try:

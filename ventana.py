@@ -45,7 +45,7 @@ class Ventana():
 
         objeto_funciones = MisFunciones(self.ventana, self.lista_series_preparadas,self.lista_series_venta,self.lista_Entry_carton_salida,
             self.lista_carton_salida_2_al_cierre, self.lista_carton_salida_siguiente_2_al_cierre, self.lista_numero_series_liquidacion, self.lista_cm70, 
-            self.lista_liquidacion_euros, self.lista_cartones_liquidacion)
+            self.lista_liquidacion_euros, self.lista_cartones_liquidacion, self.frame_columna1, self.etiqueta_zona_venta)
 
         #----FRAME LIQUIACIÓN POR RANGOS---
         colores = ["gray59", "#C0C0C0"]
@@ -128,22 +128,22 @@ class Ventana():
 
             if i == 10:
                 # COLUMNA TOTAL
-                self.frame_columna2.config(bg="#0099ff")
-                etiqueta_rotulo_titulo_total = tk.Label(self.frame_columna2, text=f"TOTAL", bg="#0099ff", font=("Times New Roman",18,"bold")) # Etiqueta numero de rango en liquidacion
+                self.frame_columna2.config(bg="#5FDFF0")
+                etiqueta_rotulo_titulo_total = tk.Label(self.frame_columna2, text=f"TOTAL", bg="#5FDFF0", font=("Times New Roman",18,"bold")) # Etiqueta numero de rango en liquidacion
                 etiqueta_rotulo_titulo_total.pack(expand=True)
 
                 self.euros_liquidacion_total = tk.Label(self.frame_columna2, text=0, fg="blue", bg = "white", font=("Times New Roman",17,"bold"), width=6)
                 self.euros_liquidacion_total.pack(expand=True)
                 self.lista_liquidacion_euros.append(self.euros_liquidacion_total)
 
-                etiqueta_liquidacion_total=tk.Label(self.frame_columna2, text = "SERIES", font=("Times New Roman", 13,"bold"), bg="#0099ff")
+                etiqueta_liquidacion_total=tk.Label(self.frame_columna2, text = "SERIES", font=("Times New Roman", 13,"bold"), bg="#5FDFF0")
                 etiqueta_liquidacion_total.pack(expand=True)
 
                 self.numero_series_liquidacion_total = tk.Label(self.frame_columna2, text=0, fg="blue", bg = "white", font=("Times New Roman",17,"bold"), width=3)
                 self.numero_series_liquidacion_total.pack(expand=True)
                 self.lista_numero_series_liquidacion.append(self.numero_series_liquidacion_total)
 
-                self.etiqueta_del_al_liquidacion_total=tk.Label(self.frame_columna2, text = "DEL-AL", font=("Times New Roman", 13,"bold"), bg="#0099ff")
+                self.etiqueta_del_al_liquidacion_total=tk.Label(self.frame_columna2, text = "DEL-AL", font=("Times New Roman", 13,"bold"), bg="#5FDFF0")
                 self.etiqueta_del_al_liquidacion_total.pack(expand=True)
 
                 self.cartones_liquidacion_total = tk.Label(self.frame_columna2, text=0, fg="blue", bg = "white", font=("Times New Roman",13,"bold"), width=8)
@@ -251,13 +251,14 @@ class Ventana():
 
             if i == 10:
                 # COLUMNA PRECIOS
-                self.frame_columna4.config(bg="#0099ff")
-                etiqueta_rotulo_titulo_total = tk.Label(self.frame_columna4, text=f"PRECIOS", bg="#0099ff", font=("Times New Roman",13,"bold")) # Etiqueta numero de rango en liquidacion
+                self.frame_columna4.config(bg="#5FDFF0")
+                etiqueta_rotulo_titulo_total = tk.Label(self.frame_columna4, text=f"PRECIOS", bg="#5FDFF0", font=("Times New Roman",13,"bold")) # Etiqueta numero de rango en liquidacion
                 etiqueta_rotulo_titulo_total.pack(pady=20)
 
                 lista_precios = ["1,5€", "2€", "3€", "6€"]
-                for i in lista_precios:
-                    tk.Label(self.frame_columna4, text= i, font=("Times New Roman",20,"bold"), bg="#0099ff").pack(pady=20)
+                colores_precios = ["blue", "#E7692C", "#AF45D2", "#893E65"]
+                for i in range(4):
+                    tk.Label(self.frame_columna4, text= lista_precios[i], font=("Times New Roman",20,"bold"), bg="#5FDFF0", fg=colores_precios[i]).pack(pady=20)
 
         #---FRAME ENCABEZAMIENTO CON ETIQUETA VENTA---
         self.frame_columna5 = tk.Frame(self.ventana, bg="blue")
