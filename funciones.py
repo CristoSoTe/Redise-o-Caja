@@ -2,7 +2,8 @@ import tkinter as tk
 
 class MisFunciones:
     def __init__(self, ventana, lista_series_botones, lista_series_venta, lista_Entry_carton_salida, lista_carton_salidas, 
-        lista_carton_salida_siguiente, lista_series_liquidacion, datos_cm70, euros, cartones_rangos, frame_1, etiqueta_liquidacion):
+        lista_carton_salida_siguiente, lista_series_liquidacion, datos_cm70, euros, cartones_rangos, frame_1, etiqueta_liquidacion,
+        columnas_venta, etiqueta_vacia_venta):
         self.ventana = ventana
         self.lista_series_botones = lista_series_botones
         self.lista_series_venta = lista_series_venta
@@ -15,6 +16,8 @@ class MisFunciones:
         self.cartones_rangos = cartones_rangos
         self.frame1 = frame_1
         self.etiqueta_liquidacion = etiqueta_liquidacion
+        self.columnas_venta = columnas_venta
+        self.etiqueta_vacia_venta = etiqueta_vacia_venta
 
     def incrementar_etiqueta(self, ident, etiqueta):
         #Incrementa el valor de la etiqueta en 1.
@@ -39,6 +42,7 @@ class MisFunciones:
         etiqueta2["text"] = valor_actual
         self.cartones_salidas()
         self.cartones_salidas_siguiete()
+        self.colores()
         
     def subir_todo_a_venta(self):
         #copia todas las series preparadas en el frame de los botones y las sube a venta
@@ -47,6 +51,7 @@ class MisFunciones:
             label_destino.config(text=texto_origen)
         self.cartones_salidas()
         self.cartones_salidas_siguiete()
+        self.colores()
 
     def cartones_salidas(self):
         indice_carton_salida = 4 #esta variable es para saltar a la casilla que le corresponde en el carton de salida
@@ -230,6 +235,8 @@ class MisFunciones:
         self.colores()
 
     def colores(self):
+        colores = ["#C0C0C0", "gray59"]
+
         if self.datos_cm70[0].get() == "1.5":
             self.frame1.config(bg="blue")
             self.etiqueta_liquidacion.config(bg="blue")
@@ -242,6 +249,15 @@ class MisFunciones:
         elif self.datos_cm70[0].get() == "6":
             self.frame1.config(bg="#893E65")
             self.etiqueta_liquidacion.config(bg="#893E65")
+        for i in range(8):
+            color = colores[i % 2]
+            if int(self.lista_series_venta[i+1].cget("text")) != 0:
+                self.columnas_venta[i+1].config(bg="#00FFFF")
+                color1 = self.columnas_venta[i+1].cget("bg")
+                self.etiqueta_vacia_venta.config(text=color1)
+            else:
+                self.columnas_venta[i+1].config(bg=color)
+                self.etiqueta_vacia_venta.config(bg=color)
 
     def pico_salida(self, salida):
         try:
