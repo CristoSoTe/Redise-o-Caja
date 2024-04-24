@@ -249,15 +249,20 @@ class MisFunciones:
         elif self.datos_cm70[0].get() == "6":
             self.frame1.config(bg="#893E65")
             self.etiqueta_liquidacion.config(bg="#893E65")
+        indice = 0
         for i in range(8):
             color = colores[i % 2]
+
             if int(self.lista_series_venta[i+1].cget("text")) != 0:
                 self.columnas_venta[i+1].config(bg="#00FFFF")
-                color1 = self.columnas_venta[i+1].cget("bg")
-                self.etiqueta_vacia_venta.config(text=color1)
+                for h in range(4):
+                    self.etiqueta_vacia_venta[indice].config(bg="#00FFFF")
+                    indice += 1
             else:
                 self.columnas_venta[i+1].config(bg=color)
-                self.etiqueta_vacia_venta.config(bg=color)
+                for h in range(4):
+                    self.etiqueta_vacia_venta[indice].config(bg=color)
+                    indice += 1
 
     def pico_salida(self, salida):
         try:
