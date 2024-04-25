@@ -20,6 +20,10 @@ class Ventana():
             self.ventana.grid_columnconfigure(i, weight=1)
 
         # LISTAS DE LIQUIDACION
+        self.lista_frame2 = []
+        self.lista_etiqueta_rango_liquidacion = []
+        self.lista_etiqueta_series_liquidacion = []
+        self.lista_etiqueta_del_al = []
         self.lista_liquidacion_euros = []
         self.lista_numero_series_liquidacion = []
         self.lista_cartones_liquidacion = []
@@ -27,6 +31,8 @@ class Ventana():
         # LISTAS DE VENTA
         self.lista_frame4 = []
         self.lista_etiqueta_vacia_vanta = []
+        self.lista_etiqueta_series_venta = []
+        self.lista_etiqueta_salidas_venta = []
         self.lista_series_venta = []
         self.lista_Entry_carton_salida = []
         self.lista_carton_salida_2_al_cierre = []
@@ -53,7 +59,8 @@ class Ventana():
             color = colores[i % 2]  # Alternar entre los dos colores
 
             self.frame_columna2 = tk.Frame(self.ventana, bg=color, bd=2, relief="groove")
-            self.frame_columna2.grid(row=1, column=i, sticky="nsew")  # 
+            self.frame_columna2.grid(row=1, column=i, sticky="nsew")
+            self.lista_frame2.append(self.frame_columna2)
 
             if i == 0:
                 # COLUMNA RANGO 1
@@ -83,6 +90,7 @@ class Ventana():
                 # COLUMNA RANGOS DEL 2 AL 9
                 self.etiqueta_rotulo_titulo_rangos = tk.Label(self.frame_columna2, text=f"RANGO {i+1}", bg=color, font=("Times New Roman",18,"bold"))
                 self.etiqueta_rotulo_titulo_rangos.pack(expand=True)
+                self.lista_etiqueta_rango_liquidacion.append(self.etiqueta_rotulo_titulo_rangos)
 
                 self.euros_liquidacion_rangos = tk.Label(self.frame_columna2, text=0, fg="blue", bg = "white", font=("Times New Roman",17,"bold"), width=6)
                 self.euros_liquidacion_rangos.pack(expand=True)
@@ -90,6 +98,7 @@ class Ventana():
 
                 self.etiqueta_series_liquidacion_rangos=tk.Label(self.frame_columna2, text = "SERIES", font=("Times New Roman", 13,"bold"), bg=color)
                 self.etiqueta_series_liquidacion_rangos.pack(expand=True)
+                self.lista_etiqueta_series_liquidacion.append(self.etiqueta_series_liquidacion_rangos)
 
                 self.numero_series_liquidacion_rangos = tk.Label(self.frame_columna2, text=0, fg="blue", bg = "white", font=("Times New Roman",17,"bold"), width=3)
                 self.numero_series_liquidacion_rangos.pack(expand=True)
@@ -97,6 +106,7 @@ class Ventana():
 
                 self.etiqueta_del_al_liquidacion_rangos=tk.Label(self.frame_columna2, text = "DEL-AL", font=("Times New Roman", 13,"bold"), bg=color)
                 self.etiqueta_del_al_liquidacion_rangos.pack(expand=True)
+                self.lista_etiqueta_del_al.append(self.etiqueta_del_al_liquidacion_rangos)
 
                 self.cartones_liquidacion_rangos = tk.Label(self.frame_columna2, text="0", fg="blue", bg = "white", font=("Times New Roman",13,"bold"), width=8)
                 self.cartones_liquidacion_rangos.pack(expand=True)
@@ -192,6 +202,7 @@ class Ventana():
                 # COLUMNA RANGOS DEL 2 AL 9
                 self.etiqueta_rotulo_titulo_rangos = tk.Label(self.frame_columna4, text=f"SERIES", bg=color, font=("Times New Roman",13,"bold")) # Etiqueta numero de rango en liquidacion
                 self.etiqueta_rotulo_titulo_rangos.pack()
+                self.lista_etiqueta_series_venta.append(self.etiqueta_rotulo_titulo_rangos)
 
                 self.etiqueta_numero_series_por_rangos_venta = tk.Label(self.frame_columna4, text=0, fg="blue", bg = "white", font=("Times New Roman",17,"bold"), width=3)
                 self.etiqueta_numero_series_por_rangos_venta.pack()
@@ -199,6 +210,7 @@ class Ventana():
 
                 self.etiquetas_salidas_ventas=tk.Label(self.frame_columna4, text = "SALIDAS", font=("Times New Roman", 15,"bold"), bg=color)
                 self.etiquetas_salidas_ventas.pack()
+                self.lista_etiqueta_salidas_venta.append(self.etiquetas_salidas_ventas)
                 
                 for h in range(4):
                     #carton_salida = self.numero_carton_salida_2_9[indice_carton_salida]
@@ -259,7 +271,8 @@ class Ventana():
         objeto_funciones = MisFunciones(self.ventana, self.lista_series_preparadas,self.lista_series_venta,self.lista_Entry_carton_salida,
             self.lista_carton_salida_2_al_cierre, self.lista_carton_salida_siguiente_2_al_cierre, self.lista_numero_series_liquidacion, self.lista_cm70, 
             self.lista_liquidacion_euros, self.lista_cartones_liquidacion, self.frame_columna1, self.etiqueta_zona_liquidacion, self.lista_frame4,
-            self.lista_etiqueta_vacia_vanta)
+            self.lista_etiqueta_vacia_vanta, self.lista_etiqueta_series_venta, self.lista_etiqueta_salidas_venta, self.lista_frame2,
+            self.lista_etiqueta_rango_liquidacion, self.lista_etiqueta_series_liquidacion, self.lista_etiqueta_del_al)
 
         #---FRAME ENCABEZAMIENTO CON ETIQUETA VENTA---
         self.frame_columna5 = tk.Frame(self.ventana, bg="blue")
