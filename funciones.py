@@ -149,7 +149,7 @@ class MisFunciones:
                 self.lista_carton_salida_siguiente[i].config(text = salida_final_rango2)
                 salida_rango_anterior = salida_final_rango2
                 valor = 1
-                
+            ########REVISA PORQUE ESTE FOR ESTA ANIDADO    
             #Calcula e imprime el carton de salida del rango 3 al 9 de todos los precios
             for h in range(7):
                 if self.lista_series_botones[h+2].cget("text") == 0 or self.lista_series_botones[h+2].cget("text") == "0":
