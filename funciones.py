@@ -133,15 +133,21 @@ class MisFunciones:
         indice_carton_salida = 4 #esta variable es para saltar a la casilla que le corresponde en el carton de salida
         valor = 1#Esta variable es para corregir cuando un rango no tiene series
         for i in range(4):
-            #Calcula e imprime el carton de salida del rango 2 de todos los precios separado del resto de rangos por el pico de salida del rango 1
+            ##Calcula e imprime el carton de salida del rango 2 de todos los precios separado del resto de rangos por el pico de salida del rango 1
             salida_rango2 = (int(self.lista_series_botones[0].cget("text")) * 6) + self.pico_salida(self.salida[i].get()) + int(self.salida[i].get())
+            #Verifica si el carton es superior al 1800 para corregir
+            if salida_rango2 > 1800:
+                salida_final_rango2 = salida_rango2 - 1800
+            else:
+                salida_final_rango2 = salida_rango2
+            #imprime el carton de salida
             if self.lista_series_botones[1].cget("text") == 0 or self.lista_series_botones[1].cget("text") == "0":
                 self.lista_carton_salida_siguiente[i].config(text = "0")
                 salida_rango_anterior = int(self.salida[i].get())
                 valor -= 1
             else:
-                self.lista_carton_salida_siguiente[i].config(text = salida_rango2)
-                salida_rango_anterior = salida_rango2
+                self.lista_carton_salida_siguiente[i].config(text = salida_final_rango2)
+                salida_rango_anterior = salida_final_rango2
                 valor = 1
                 
             #Calcula e imprime el carton de salida del rango 3 al 9 de todos los precios
@@ -260,6 +266,7 @@ class MisFunciones:
 
         self.color_liquidacion()
         self.subir_todo_a_venta()
+        self.actualiza_salida()
 
     def color_liquidacion(self):
         colores = ["#C0C0C0", "gray59"]
@@ -310,6 +317,28 @@ class MisFunciones:
                 for h in range(4):
                     self.etiqueta_vacia_venta[indice].config(bg=color)
                     indice += 1
+    def actualiza_salida(self):
+        salida = int(self.datos_cm70[7].get()) + 1
+        if salida > 1800:
+            salida_final = 1
+        else:
+            salida_final = salida
+
+        if self.datos_cm70[0].get() == "1.5":
+            self.salida[0].delete(0, tk.END)  #Borra el contenido actual del Entry
+            self.salida[0].insert(0, salida_final) #Imprime el contenido nuevo en el Entry
+        elif self.datos_cm70[0].get() == "2":
+            self.salida[1].delete(0, tk.END)
+            self.salida[1].insert(0, salida_final)
+        elif self.datos_cm70[0].get() == "3":
+            self.salida[2].delete(0, tk.END)
+            self.salida[2].insert(0, salida_final)
+        elif self.datos_cm70[0].get() == "6":
+            self.salida[3].delete(0, tk.END)
+            self.salida[3].insert(0, salida_final)
+
+        self.cartones_salidas()
+        self.cartones_salidas_siguiete()
 
     def pico_salida(self, salida):
         try:
