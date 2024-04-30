@@ -82,21 +82,20 @@ class MisFunciones:
     def cartones_salidas(self):
         indice_carton_salida = 4 #esta variable es para saltar a la casilla que le corresponde en el carton de salida
         valor = 1#Esta variable es para corregir cuando un rango no tiene series
+
+        #Calcula e imprime el carton de salida del rango 2 de todos los precios separado del resto de rangos por el pico de salida del rango 1
         for i in range(4):
-            #Calcula e imprime el carton de salida del rango 2 de todos los precios separado del resto de rangos por el pico de salida del rango 1
             salida_rango2 = (int(self.lista_series_venta[0].cget("text")) * 6) + self.pico_salida(self.salida[i].get()) + int(self.salida[i].get())
             #Verifica si el carton es superior al 1800 para corregir
             if salida_rango2 > 1800:
-                salida_final_rango2 = salida_rango2 - 1800
-            else:
-                salida_final_rango2 = salida_rango2
+                salida_rango2 = salida_rango2 - 1800
             if self.lista_series_venta[1].cget("text") == 0 or self.lista_series_venta[1].cget("text") == "0":
                 self.lista_carton_salidas[i].config(text = "0")
-                salida_rango_anterior = salida_final_rango2 #int(self.salida[i].get())
-                valor -= 1
+                salida_rango_anterior = salida_rango2 - int(self.lista_series_venta[0].cget("text")) * 6
+                valor -= 1 
             else:
-                self.lista_carton_salidas[i].config(text = salida_final_rango2)
-                salida_rango_anterior = salida_final_rango2
+                self.lista_carton_salidas[i].config(text = salida_rango2)
+                salida_rango_anterior = salida_rango2
                 valor = 1
                 
             #Calcula e imprime el carton de salida del rango 3 al 9 de todos los precios
@@ -107,12 +106,10 @@ class MisFunciones:
                 else:
                     carton_salida = int(salida_rango_anterior) + int(self.lista_series_venta[h+valor].cget("text")) * 6
                     if carton_salida > 1800:
-                        carton_salida_final = carton_salida - 1800
-                    else:
-                        carton_salida_final = carton_salida
-                    self.lista_carton_salidas[indice_carton_salida].config(text=carton_salida_final)
+                        carton_salida = carton_salida - 1800
+                    self.lista_carton_salidas[indice_carton_salida].config(text=carton_salida)
                     valor = 1
-                    salida_rango_anterior = carton_salida_final
+                    salida_rango_anterior = carton_salida
                     
                 # Calculamos e imprimimos el carton de salida del cierre de todos los precios
                 if indice_carton_salida == 28:
@@ -146,17 +143,15 @@ class MisFunciones:
             salida_rango2 = (int(self.lista_series_botones[0].cget("text")) * 6) + self.pico_salida(self.salida[i].get()) + int(self.salida[i].get())
             #Verifica si el carton es superior al 1800 para corregir
             if salida_rango2 > 1800:
-                salida_final_rango2 = salida_rango2 - 1800
-            else:
-                salida_final_rango2 = salida_rango2
+                salida_rango2 = salida_rango2 - 1800
             #imprime el carton de salida
             if self.lista_series_botones[1].cget("text") == 0 or self.lista_series_botones[1].cget("text") == "0":
                 self.lista_carton_salida_siguiente[i].config(text = "0")
-                salida_rango_anterior = salida_final_rango2 #int(self.salida[i].get())
+                salida_rango_anterior = salida_rango2 - int(self.lista_series_botones[0].cget("text")) * 6
                 valor -= 1
             else:
-                self.lista_carton_salida_siguiente[i].config(text = salida_final_rango2)
-                salida_rango_anterior = salida_final_rango2
+                self.lista_carton_salida_siguiente[i].config(text = salida_rango2)
+                salida_rango_anterior = salida_rango2
                 valor = 1
                     
             #Calcula e imprime el carton de salida del rango 3 al 9 de todos los precios
@@ -167,12 +162,10 @@ class MisFunciones:
                 else:
                     carton_salida = int(salida_rango_anterior) + int(self.lista_series_botones[h+valor].cget("text")) * 6
                     if carton_salida > 1800:
-                        carton_salida_final = carton_salida - 1800
-                    else:
-                        carton_salida_final = carton_salida
-                    self.lista_carton_salida_siguiente[indice_carton_salida].config(text=carton_salida_final)
+                        carton_salida = carton_salida - 1800
+                    self.lista_carton_salida_siguiente[indice_carton_salida].config(text=carton_salida)
                     valor = 1
-                    salida_rango_anterior = carton_salida_final
+                    salida_rango_anterior = carton_salida
                     
                 # Calculamos e imprimimos el carton de salida del cierre de todos los precios
                 if indice_carton_salida == 28:
