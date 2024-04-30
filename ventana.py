@@ -331,8 +331,8 @@ class Ventana():
 
                 boton_atras = tk.Button(self.frame_botones, text="ATRÁS", bg="#e8e800", width=10, height=1)
                 boton_atras.pack(expand=True)
-                boton_historico = tk.Button(self.frame_botones, text="HISTÓRICO", bg="#00f078", width=10, height=1)
-                boton_historico.pack(expand=True)
+                boton_actualizar = tk.Button(self.frame_botones, text="ACTUALIZAR", bg="#00f078", width=10, height=1, command=objeto_funciones.rectifica_cierre)
+                boton_actualizar.pack(expand=True)
                 boton_salir = tk.Button(self.frame_botones, text="SALIR", bg="red", width=10, height=1, command=objeto_funciones.cerrar_programa)
                 boton_salir.pack(expand=True)
 

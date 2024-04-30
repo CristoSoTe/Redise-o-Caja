@@ -248,6 +248,34 @@ class MisFunciones:
 
         self.calcula_liquidacion(pico_inicial)
 
+    def rectifica_cierre(self):
+        carton_inicial = int(self.datos_cm70[1].get())
+        pico_inicial = self.pico_salida(carton_inicial)
+
+        pico_cierre = self.pico_cierre(self.datos_cm70[7].get())
+        #Calcula la liquidacion del rango 1 por tener pico
+        euros_R1 = str("{:.2f}".format((int(self.series) * 6 + int(pico_inicial)) * float(self.datos_cm70[0].get())))
+        simbolo = "€"
+        self.euros[0].config(text=euros_R1 + simbolo)
+
+        #Calcula la liquidacion del rango 2 al 9
+        for i in range(8):
+            euros_R2_al_9 = str("{:.2f}".format(int(self.lista_series_liquidacion[i+1].cget("text")) * 6 * float(self.datos_cm70[0].get())))
+            self.euros[i+1].config(text=euros_R2_al_9 + simbolo)
+
+        #Calcula liquidacion del cierre por tener pico
+        self.extrae_series_cierre = self.lista_series_liquidacion[9].cget("text").split("+")[0]
+        euros_cierre = str("{:.2f}".format((int(self.extrae_series_cierre) * 6 + int(pico_cierre)) * float(self.datos_cm70[0].get())))
+        simbolo = "€"
+        self.euros[9].config(text=euros_cierre + simbolo)
+
+        #Calcula el total liquidacion
+        total_liquidacion =  str("{:.2f}".format(float(self.datos_cm70[0].get()) * int(self.datos_cm70[2].get())))
+        self.euros[10].config(text=total_liquidacion + simbolo)
+
+        self.color_liquidacion()
+        self.cartones_por_rango()
+
     def calcula_liquidacion(self, pico_inicial):
         pico_cierre = self.pico_cierre(self.datos_cm70[7].get())
         #Calcula la liquidacion del rango 1 por tener pico
@@ -292,7 +320,7 @@ class MisFunciones:
         for i in range(8):
             color = colores[i % 2]
 
-            if int(self.lista_series_venta[i+1].cget("text")) != 0:
+            if int(self.lista_series_liquidacion[i+1].cget("text")) != 0:
                 self.frame_liquidacion[i+1].config(bg="#00FFFF")
                 self.etiqueta_rango_liquidacion[i].config(bg="#00FFFF")
                 self.etiqueta_series_liquidacion[i].config(bg="#00FFFF")
