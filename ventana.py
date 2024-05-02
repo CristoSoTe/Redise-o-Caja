@@ -277,7 +277,7 @@ class Ventana():
         #---FRAME ENCABEZAMIENTO CON ETIQUETA VENTA---
         self.frame_columna5 = tk.Frame(self.ventana, bg="blue")
         self.frame_columna5.grid(row=4, column=0, columnspan=11, sticky="nsew")
-        self.boton_cierre = tk.Button(self.frame_columna5, text=f"CERRAR", font=("Times New Roman",18,"bold"), bg="green", fg="white", command=objeto_funciones.cierre_partida)#lambda: self.lista_series_venta, self.lista_numero_series_liquidacion
+        self.boton_cierre = tk.Button(self.frame_columna5, text=f"CERRAR", font=("Times New Roman",18,"bold"), bg="green", fg="white", command=objeto_funciones.cierre_partida)
         self.boton_cierre.pack(pady=2)
 
         #---FRAME BOTONES DE SUBIDA Y BAJADA DE SERIES
@@ -375,7 +375,7 @@ class Ventana():
         self.lista_cm70[6].delete(0, tk.END)  # Borra el contenido actual del Entry
         self.lista_cm70[6].insert(0, 428)
         self.lista_cm70[7].delete(0, tk.END)  # Borra el contenido actual del Entry
-        self.lista_cm70[7].insert(0, 426)
+        self.lista_cm70[7].insert(0, 425)
         self.lista_cm70[8].delete(0, tk.END)  # Borra el contenido actual del Entry
         self.lista_cm70[8].insert(0, 4)
         self.lista_cm70[9].delete(0, tk.END)  # Borra el contenido actual del Entry
